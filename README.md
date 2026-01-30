@@ -1,54 +1,47 @@
-Perfil de autoconocimiento profesional: Whetten & Cameron
-Esta herramienta interactiva permite la evaluación diagnóstica de competencias individuales basándose en el marco teórico de Whetten y Cameron (2014) en su obra Desarrollo de habilidades directivas. Está diseñada para fomentar la reflexión crítica sobre el estilo de procesamiento de información y la adaptabilidad ante el entorno.
+Perfil de utoconocimiento: Whetten & Cameron
+Esta herramienta interactiva permite la evaluación diagnóstica de competencias individuales basándose en el marco teórico de Whetten y Cameron (2014) en su obra Desarrollo de habilidades directivas. Está diseñada para fomentar la reflexión crítica sobre el estilo de procesamiento de información y la adaptabilidad ante el entorno cambiante.
 
 Propósito de la herramienta
-La aplicación facilita el diagnóstico de tres constructos psicológicos fundamentales para la gestión directiva y el liderazgo:
+La aplicación facilita el diagnóstico de tres constructos psicológicos fundamentales para la gestión directiva y la excelencia en el liderazgo:
 
-Estilo cognoscitivo: Evalúa la inclinación individual para percibir, interpretar y responder a la información. Se analiza a través de las dimensiones de Conocimiento, Planeación y Creatividad.
+Estilo Cognoscitivo: Evalúa la inclinación individual para percibir, interpretar y responder a la información. Se analiza a través de las dimensiones de Conocimiento, Planeación y Creatividad. Es una tendencia de aprendizaje susceptible de alteración mediante la práctica consciente.
 
-Locus de control: Determina la actitud del individuo respecto al grado de control que ejerce sobre su propio destino.
+Locus de Control: Determina la "expectativa generalizada" del individuo respecto al grado de control que ejerce sobre su propio destino y los reforzamientos que recibe.
 
-Tolerancia a la Ambigüedad: Mide la capacidad de afrontar situaciones inciertas, complejas o sobrecargadas de información sin experimentar amenaza.
-
+Tolerancia a la Ambigüedad: Mide la complejidad cognoscitiva o capacidad de afrontar situaciones inciertas, dinámicas o sobrecargadas de información sin experimentar amenaza.
 
 Guía de Aplicación
-Acceso: Inicie el cuestionario mediante el enlace proporcionado.
+Navegación: Utilice las pestañas superiores para transitar entre las secciones.
 
-Navegación: Utilice las pestañas superiores para transitar entre las tres secciones.
+Ejecución: Seleccione su postura marcando los botones numéricos o de opción.
 
-Ejecución: Seleccione su respuesta marcando directamente los botones numéricos o de opción.
+Diagnóstico: Al finalizar todos los reactivos, haga clic en "Generar Diagnóstico Académico".
 
-Resultados: Al finalizar todos los reactivos, haga clic en "Generar Diagnóstico Profesional".
+Entregable: Copie sus resultados y proceda a completar su archivo REFLEXION.md en su repositorio personal.
 
-Evidencia: Descargue o imprima su reporte para la fase de reflexión escrita.
-
-Estructura y Escalas
+Estructura y Dimensiones
 1. Estilo Cognoscitivo (18 reactivos)
 Escala: 1 (Totalmente en desacuerdo) a 5 (Totalmente de acuerdo).
 
-Enfoque: Determina si su tendencia es hacia el Conocimiento (hechos y lógica), la Planeación (estructura y metodología) o la Creatividad (innovación y espontaneidad).
+Subescalas:
+
+Conocimiento: Énfasis en hechos, detalles y lógica subyacente.
+
+Planeación: Inclinación hacia la estructura, agendas y metodología sistemática.
+
+Creativo: Preferencia por la experimentación, novedad y pensamiento intuitivo.
 
 2. Locus de Control (29 reactivos)
 Formato: Elección forzada entre pares de enunciados (a o b).
 
-Enfoque: Identifica si posee un Locus Interno (asunción de responsabilidad personal) o Externo (atribución a fuerzas ajenas como la suerte o el destino).
+Interno (0-11 pts): Atribución de resultados a las propias acciones y esfuerzo.
+
+Externo (>11 pts): Atribución de resultados a fuerzas externas (suerte, destino o terceros).
 
 3. Tolerancia a la Ambigüedad (16 reactivos)
 Escala: 1 (Totalmente en desacuerdo) a 7 (Totalmente de acuerdo).
 
-Enfoque: Mide la complejidad cognoscitiva ante la Novedad, la Complejidad y la Insolubilidad.
+Dimensiones: Evalúa la respuesta ante la Novedad, la Complejidad y la Insolubilidad de los problemas.
 
-Interpretación Académica (Resumen)
-Estilo Cognoscitivo: Representa inclinaciones de aprendizaje y respuesta que son susceptibles de modificación mediante la práctica consciente.
-
-Locus de Control: Define la "expectativa generalizada" sobre la fuente de reforzamiento en un entorno cambiante.
-
-Tolerancia a la Ambigüedad: Una alta tolerancia indica un comportamiento más adaptable y flexible, aunque puede conllevar una menor concentración al atender múltiples señales simultáneamente.
-
-Fundamento Teórico
-Este instrumento es una transposición tecnológica de:
-
+Referencia Bibliográfica
 Whetten, D. A., & Cameron, K. S. (2014). Desarrollo de habilidades directivas (9ª ed.). Pearson Educación.
-
-Nota Pedagógica: Recuerde que este perfil no define su personalidad de forma estática, sino que revela tendencias actuales que sirven como punto de partida para su desarrollo profesional.
-
