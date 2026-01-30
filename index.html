@@ -762,7 +762,8 @@
                                max="5" 
                                value="3" 
                                id="cog_${index}"
-                               oninput="updateRangeValue(this); saveAnswer('cognitive', ${index}, this.value)">
+                               oninput="updateRangeValue(this); saveAnswer('cognitive', ${index}, this.value)"
+                               onchange="saveAnswer('cognitive', ${index}, this.value)">
                         <span class="scale-label">Totalmente de acuerdo</span>
                         <span class="range-value" id="cog_${index}_value">3</span>
                     </div>
@@ -819,7 +820,8 @@
                                max="7" 
                                value="4" 
                                id="amb_${index}"
-                               oninput="updateRangeValue(this); saveAnswer('ambiguity', ${index}, this.value)">
+                               oninput="updateRangeValue(this); saveAnswer('ambiguity', ${index}, this.value)"
+                               onchange="saveAnswer('ambiguity', ${index}, this.value)">
                         <span class="scale-label">Totalmente de acuerdo</span>
                         <span class="range-value" id="amb_${index}_value">4</span>
                     </div>
@@ -895,7 +897,16 @@
                         updateRangeValue(input);
                     }
                 });
+            } else {
+                // Inicializar valores por defecto si no hay guardados
+                cognitiveData.forEach((_, index) => {
+                    answers.cognitive[index] = '3';
+                });
+                ambiguityData.forEach((_, index) => {
+                    answers.ambiguity[index] = '4';
+                });
             }
+            updateProgress();
         }
 
         function updateProgress() {
