@@ -3,174 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Autoconocimiento - Whetten & Cameron</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Perfil de Autoconocimiento Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #1a4d2e; --accent: #ffd700; --bg: #faf8f3; --text: #2b2b2b; }
-        body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; }
-        .header { background: var(--primary); color: white; padding: 2.5rem; text-align: center; border-bottom: 5px solid var(--accent); }
-        .container { max-width: 850px; margin: 2rem auto; padding: 0 1.5rem; }
-        .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
-        .tab { flex: 1; padding: 12px; background: white; border: 2px solid #d4c5b0; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 600; transition: 0.3s; }
-        .tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+        body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
+        .header { background: var(--primary); color: white; padding: 2rem; text-align: center; border-bottom: 5px solid var(--accent); }
+        .container { max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; }
+        
+        /* Tabs mejoradas */
+        .tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab { flex: 1; padding: 12px; background: #eee; border: none; border-radius: 8px; cursor: pointer; text-align: center; font-weight: 600; transition: 0.3s; min-width: 150px; }
+        .tab.active { background: var(--primary); color: white; }
+
         .tab-content { display: none; background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .tab-content.active { display: block; }
-        .question { border-bottom: 1px solid #eee; padding: 20px 0; }
-        .label-container { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-top: 5px; font-weight: 600; }
-        .btn-primary { background: var(--primary); color: white; border: none; padding: 1.2rem; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.1rem; font-weight: bold; margin-top: 20px; }
-        .results-card { display: none; margin-top: 2rem; background: white; padding: 2rem; border-radius: 15px; border-left: 6px solid var(--primary); }
-        .interpretation-box { background: #f0f4f1; padding: 15px; border-radius: 8px; margin-top: 10px; font-size: 0.95rem; }
+
+        /* Escala de Botones (Nueva interfaz más fácil de usar) */
+        .question { border-bottom: 1px solid #eee; padding: 25px 0; }
+        .options-container { display: flex; justify-content: space-between; margin-top: 15px; gap: 5px; }
+        .opt-btn { flex: 1; padding: 10px; border: 2px solid #ddd; background: white; border-radius: 8px; cursor: pointer; transition: 0.2s; font-weight: bold; }
+        .opt-btn:hover { border-color: var(--primary); }
+        .opt-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        .scale-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: #777; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .btn-submit { background: var(--primary); color: white; border: none; padding: 1.5rem; border-radius: 12px; cursor: pointer; width: 100%; font-size: 1.2rem; font-weight: bold; margin-top: 30px; }
+        
+        /* Retroalimentación Contextualizada */
+        .results-card { display: none; margin-top: 2rem; background: white; padding: 2.5rem; border-radius: 15px; border-top: 8px solid var(--primary); }
+        .feedback-item { margin-bottom: 25px; padding: 15px; border-radius: 10px; background: #f9fbf9; border: 1px solid #eef2ee; }
+        .feedback-item h4 { color: var(--primary); margin-top: 0; border-bottom: 2px solid var(--accent); display: inline-block; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Perfil de Autoconocimiento</h1>
-        <p>Gestión de las Relaciones | Whetten & Cameron (2014)</p>
+
+<div class="header">
+    <h1>Perfil de Autoconocimiento</h1>
+    <p>Asesoría Pedagógica para la Excelencia en Gestión</p>
+</div>
+
+<div class="container">
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab(0)">Estilo Cognoscitivo</button>
+        <button class="tab" onclick="switchTab(1)">Locus de Control</button>
+        <button class="tab" onclick="switchTab(2)">Ambigüedad</button>
     </div>
 
-    <div class="container">
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab(0)">1. Estilo Cognoscitivo</div>
-            <div class="tab" onclick="switchTab(1)">2. Locus de Control</div>
-            <div class="tab" onclick="switchTab(2)">3. Ambigüedad</div>
-        </div>
+    <form id="quizForm">
+        <div class="tab-content active" id="tab0"><div id="cogBox"></div></div>
+        <div class="tab-content" id="tab1"><div id="locBox"></div></div>
+        <div class="tab-content" id="tab2"><div id="ambBox"></div></div>
+        
+        <button type="button" class="btn-submit" onclick="processResults()">Finalizar y Ver Diagnóstico Detallado</button>
+    </form>
 
-        <form id="assessmentForm">
-            <div class="tab-content active" id="tab0">
-                <h2>Indicador del Estilo Cognoscitivo</h2>
-                <div id="cogContainer"></div>
-            </div>
-            <div class="tab-content" id="tab1">
-                <h2>Escala de Locus de Control</h2>
-                <div id="locContainer"></div>
-            </div>
-            <div class="tab-content" id="tab2">
-                <h2>Tolerancia a la Ambigüedad</h2>
-                <div id="ambContainer"></div>
-            </div>
-            <button type="button" class="btn-primary" onclick="calculate()">Obtener Perfil y Explicación</button>
-        </form>
-
-        <div id="results" class="results-card">
-            <h2 style="color: var(--primary); text-align: center;">Tu Perfil Diagnóstico</h2>
-            <div id="resultsContent"></div>
-        </div>
+    <div id="results" class="results-card">
+        <h2 style="text-align:center">Informe de Perfil Individual</h2>
+        <div id="resOutput"></div>
     </div>
+</div>
 
 <script>
-    // Datos y Claves de Puntuación [cite: 108, 111, 113, 116, 127]
-    const cogQs = [
-        "Para mí es muy importante la elaboración de un plan claro.", "Me gusta contribuir a soluciones innovadoras.",
-        "Siempre me gusta saber qué se debe hacer y cuándo.", "Prefiero buscar soluciones creativas.",
-        "Me gusta entender plenamente un problema.", "Me gustan los planes de acción detallados.",
-        "Me siento motivado por la innovación continua.", "Me gusta analizar los problemas.",
-        "Prefiero contar con una estructura clara para hacer mi trabajo.", "Me gusta tener una gran variedad en mi vida.",
-        "Realizo análisis detallados.", "Prefiero las reuniones bien planeadas y con una agenda clara.",
-        "Me atraen más las ideas nuevas que las soluciones ya existentes.", "Estudio cada problema hasta entender la lógica subyacente.",
-        "Tomo decisiones definitivas y hago seguimientos meticulosos.", "Me gusta extender los límites.",
-        "Una buena tarea es una tarea bien preparada.", "Trato de evitar la rutina."
-    ];
-
-    const locQs = [
-        {a: "Los líderes nacen.", b: "Los líderes se hacen."}, {a: "El éxito es suerte.", b: "El éxito es trabajo duro."},
-        {a: "Errores personales.", b: "Calamidades inevitables."}, {a: "Líderes causan guerras.", b: "Guerras inevitables."},
-        {a: "Buenos padres.", b: "Niños malos inevitablemente."}, {a: "Futuro depende de circunstancias.", b: "Dueño de mi destino."},
-        {a: "Historia y suerte.", b: "Acciones decisivas."}, {a: "Evitar castigo es malo.", b: "No disciplina física."},
-        {a: "Poca influencia.", b: "Suerte no es crucial."}, {a: "Clientes insatisfechos.", b: "Satisfacer es posible."},
-        {a: "Éxito escolar con esfuerzo.", b: "Algunos nunca destacan."}, {a: "Matrimonio con trabajo.", b: "Incompatibilidad."},
-        {a: "Mejorar con aprendizaje.", b: "Pérdida de tiempo."}, {a: "Más cursos de liderazgo.", b: "Menos énfasis."},
-        {a: "Cosas buenas por mérito.", b: "Cosas malas fuera de control."}, {a: "Exámenes sin conexión.", b: "Preparación rinde frutos."},
-        {a: "Influencia horóscopo.", b: "Determino mi destino."}, {a: "Gobierno burocrático.", b: "Influencia política real."},
-        {a: "Personas buscan responsabilidad.", b: "Trabajan lo menos posible."}, {a: "Carisma inherente.", b: "Popularidad por conducta."},
-        {a: "Cosas fuera de control.", b: "Responsable de resultados."}, {a: "Competencia directiva.", b: "Éxito por suerte."},
-        {a: "Equipos ganan por suerte.", b: "Ganan por habilidad."}, {a: "Trabajo equipo requisito.", b: "Esfuerzo individual clave."},
-        {a: "Empleados perezosos.", b: "Directivo motiva a todos."}, {a: "Acciones responsables.", b: "Economía fuera de control."},
-        {a: "Persuasivo con razón.", b: "Convenzo sin seguridad."}, {a: "Planeo con anticipación.", b: "Rara vez planeo."},
-        {a: "Cosas destinadas.", b: "Cambiar vida con trabajo."}
-    ];
-
-    const ambQs = [
-        "Un experto sin respuesta definitiva.", "Vivir en el extranjero.", "No hay problema sin solución.",
-        "Horarios pierden alegría.", "Buen trabajo es claro.", "Problema complicado es divertido.",
-        "Problemas sencillos rinden más.", "Personas originales.", "Familiar es preferible.",
-        "Respuesta sí o no.", "Vida estable.", "Información insuficiente.", "Fiestas con conocidos.",
-        "Tareas ambiguas e iniciativa.", "Valores similares.", "Maestro que hace pensar."
-    ];
+    // Configuración de preguntas y datos
+    const cogQs = ["Plan claro", "Innovación", "Saber qué hacer", "Creatividad", "Entender problema", "Acción detallada", "Innovación continua", "Analizar problemas", "Estructura clara", "Variedad", "Análisis detallado", "Reuniones planeadas", "Ideas nuevas", "Lógica subyacente", "Decisiones definitivas", "Extender límites", "Tarea preparada", "Evitar rutina"];
+    const locQs = [{a:"Líderes nacen", b:"Líderes se hacen"}, {a:"Éxito es suerte", b:"Éxito es esfuerzo"}, {a:"Mis errores", b:"Calamidades"}, {a:"Líderes causan guerra", b:"Guerras inevitables"}, {a:"Buenos padres", b:"Niños malos siempre"}, {a:"Circunstancias", b:"Dueño de destino"}, {a:"Suerte histórica", b:"Acciones decisivas"}, {a:"Castigo criminal", b:"No disciplina física"}, {a:"Poca influencia", b:"Suerte crucial"}, {a:"Clientes insatisfechos", b:"Hacerlos felices"}, {a:"Esfuerzo escolar", b:"Niños que no destacan"}, {a:"Compatibilidad", b:"Trabajar matrimonio"}, {a:"Mejorar con clase", b:"Pérdida tiempo"}, {a:"Más cursos gestión", b:"Menos énfasis"}, {a:"Mérito propio", b:"Causas externas"}, {a:"Examen injusto", b:"Estudiar rinde"}, {a:"Horóscopo", b:"Yo determino"}, {a:"Gobierno intocable", b:"Influencia ciudadana"}, {a:"Responsabilidad", b:"Poco trabajo"}, {a:"Carisma nato", b:"Conducta admirada"}, {a:"Fuera de control", b:"Responsable logros"}, {a:"Habilidad directiva", b:"Suerte y momento"}, {a:"Suerte deportiva", b:"Habilidad técnica"}, {a:"Capacitación equipo", b:"Esfuerzo individual"}, {a:"Perezosos", b:"Motivables"}, {a:"Acción responsable", b:"Economía externa"}, {a:"Persuasivo", b:"Convencer sin razón"}, {a:"Planear metas", b:"Sale bien igual"}, {a:"Destinado", b:"Trabajo duro"}];
+    const ambQs = ["Experto sin respuesta", "Vivir fuera", "No hay insolubles", "Horarios quitan alegría", "Trabajo claro", "Problema complejo", "Sencillos mejor", "Gente original", "Familiar mejor", "Sí o No", "Vida estable", "Info insuficiente", "Fiestas conocidos", "Tareas ambiguas", "Valores iguales", "Maestro cuestionador"];
 
     function init() {
-        const c1 = document.getElementById('cogContainer');
-        cogQs.forEach((q, i) => c1.innerHTML += `
-            <div class="question">
-                <p><strong>${i+1}.</strong> ${q}</p>
-                <input type="range" min="1" max="5" id="cog_${i+1}" style="width:100%">
-                <div class="label-container">
-                    <span>1: Totalmente en desacuerdo</span>
-                    <span>5: Totalmente de acuerdo</span>
+        // Render Estilo Cognoscitivo (1-5)
+        const cogBox = document.getElementById('cogBox');
+        cogQs.forEach((q, i) => {
+            cogBox.innerHTML += `<div class="question"><p><strong>${i+1}.</strong> ${q}</p>
+                <div class="options-container" id="cog_row_${i+1}">
+                    ${[1,2,3,4,5].map(v => `<button type="button" class="opt-btn" onclick="setVal('cog', ${i+1}, ${v})">${v}</button>`).join('')}
                 </div>
-            </div>`);
-        
-        const c2 = document.getElementById('locContainer');
-        locQs.forEach((q, i) => c2.innerHTML += `<div class="question"><p><strong>${i+1}.</strong></p><input type="radio" name="loc_${i+1}" value="a"> a) ${q.a}<br><input type="radio" name="loc_${i+1}" value="b"> b) ${q.b}</div>`);
-
-        const c3 = document.getElementById('ambContainer');
-        ambQs.forEach((q, i) => c3.innerHTML += `
-            <div class="question">
-                <p><strong>${i+1}.</strong> ${q}</p>
-                <input type="range" min="1" max="7" id="amb_${i+1}" style="width:100%">
-                <div class="label-container">
-                    <span>1: Totalmente en desacuerdo</span>
-                    <span>7: Totalmente de acuerdo</span>
-                </div>
-            </div>`);
-    }
-
-    function calculate() {
-        const getV = (id) => parseInt(document.getElementById(`cog_${id}`).value) || 3;
-        
-        // Cálculos Estilo Cognoscitivo 
-        const sConoc = (getV(5)+getV(8)+getV(11)+getV(14))/4;
-        const sPlan = (getV(1)+getV(3)+getV(6)+getV(9)+getV(12)+getV(15)+getV(17))/7;
-        const sCreat = (getV(2)+getV(4)+getV(7)+getV(10)+getV(13)+getV(16)+getV(18))/7;
-
-        // Locus de Control 
-        let locScore = 0;
-        const extKeys = ["2a","3b","4b","5b","6a","7a","9a","10a","11b","12b","13b","15b","16a","17a","18a","20a","21a","22b","23a","25a","26b","28b","29a"];
-        extKeys.forEach(key => {
-            const num = key.slice(0,-1); const val = key.slice(-1);
-            if(document.querySelector(`input[name="loc_${num}"]:checked`)?.value === val) locScore++;
+                <div class="scale-labels"><span>Desacuerdo</span><span>Acuerdo</span></div></div>`;
         });
 
-        // Ambigüedad con inversión de pares [cite: 124, 125]
+        // Render Locus (a/b)
+        const locBox = document.getElementById('locBox');
+        locQs.forEach((q, i) => {
+            locBox.innerHTML += `<div class="question"><p><strong>${i+1}.</strong></p>
+                <div class="options-container">
+                    <button type="button" class="opt-btn" id="loc_${i+1}_a" onclick="setRadio(${i+1}, 'a')">a) ${q.a}</button>
+                    <button type="button" class="opt-btn" id="loc_${i+1}_b" onclick="setRadio(${i+1}, 'b')">b) ${q.b}</button>
+                </div></div>`;
+        });
+
+        // Render Ambigüedad (1-7)
+        const ambBox = document.getElementById('ambBox');
+        ambQs.forEach((q, i) => {
+            ambBox.innerHTML += `<div class="question"><p><strong>${i+1}.</strong> ${q}</p>
+                <div class="options-container" id="amb_row_${i+1}">
+                    ${[1,2,3,4,5,6,7].map(v => `<button type="button" class="opt-btn" onclick="setVal('amb', ${i+1}, ${v})">${v}</button>`).join('')}
+                </div>
+                <div class="scale-labels"><span>Poco</span><span>Mucho</span></div></div>`;
+        });
+    }
+
+    let vals = { cog: {}, loc: {}, amb: {} };
+
+    function setVal(type, id, v) {
+        vals[type][id] = v;
+        const btns = document.getElementById(`${type}_row_${id}`).querySelectorAll('.opt-btn');
+        btns.forEach(b => b.classList.toggle('selected', parseInt(b.innerText) === v));
+    }
+
+    function setRadio(id, val) {
+        vals.loc[id] = val;
+        document.getElementById(`loc_${id}_a`).classList.toggle('selected', val === 'a');
+        document.getElementById(`loc_${id}_b`).classList.toggle('selected', val === 'b');
+    }
+
+    function processResults() {
+        // Lógica de cálculo (Whetten & Cameron)
+        const getC = (i) => vals.cog[i] || 3;
+        const sConoc = (getC(5)+getC(8)+getC(11)+getC(14))/4;
+        const sPlan = (getC(1)+getC(3)+getC(6)+getC(9)+getC(12)+getC(15)+getC(17))/7;
+        const sCreat = (getC(2)+getC(4)+getC(7)+getC(10)+getC(13)+getC(16)+getC(18))/7;
+
+        let locScore = 0;
+        const extKeys = ["2a","3b","4b","5b","6a","7a","9a","10a","11b","12b","13b","15b","16a","17a","18a","20a","21a","22b","23a","25a","26b","28b","29a"];
+        extKeys.forEach(k => { if(vals.loc[k.slice(0,-1)] === k.slice(-1)) locScore++; });
+
         let ambTotal = 0;
-        for(let i=1; i<=16; i++) {
-            let v = parseInt(document.getElementById(`amb_${i}`).value) || 4;
-            if(i%2===0) v = 8-v;
-            ambTotal += v;
-        }
+        for(let i=1; i<=16; i++) { let v = vals.amb[i] || 4; if(i%2===0) v = 8-v; ambTotal += v; }
 
         document.getElementById('results').style.display = 'block';
-        document.getElementById('resultsContent').innerHTML = `
-            <div class="interpretation-box">
-                <h4>1. Estilo Cognoscitivo</h4>
-                <p>• <b>Conocimiento (${sConoc.toFixed(1)}):</b> Mide tu énfasis en hechos y datos objetivos[cite: 108].</p>
-                <p>• <b>Planeación (${sPlan.toFixed(1)}):</b> Evalúa tu inclinación hacia la estructura y preparación[cite: 110].</p>
-                <p>• <b>Creativo (${sCreat.toFixed(1)}):</b> Indica tu apertura a la innovación y soluciones no convencionales[cite: 112].</p>
+        document.getElementById('resOutput').innerHTML = `
+            <div class="feedback-item">
+                <h4>Estilo Cognoscitivo</h4>
+                <p><b>Conocimiento: ${sConoc.toFixed(1)} | Planeación: ${sPlan.toFixed(1)} | Creativo: ${sCreat.toFixed(1)}</b></p>
+                <p><i>Contexto:</i> Un puntaje alto en <b>Planeación</b> indica que prefieres el orden y los datos para gestionar relaciones. Si tu puntaje <b>Creativo</b> es alto, tiendes a resolver conflictos de forma innovadora, aunque podrías parecer poco estructurado ante otros.</p>
             </div>
-            <div class="interpretation-box">
-                <h4>2. Locus de Control (${locScore} pts)</h4>
-                <p>${locScore <= 11 ? "<b>Locus Interno:</b> Crees que tú controlas tu destino mediante tu esfuerzo personal ." : "<b>Locus Externo:</b> Tiendes a creer que factores externos (suerte/otros) influyen más en tus resultados."}</p>
+            <div class="feedback-item">
+                <h4>Locus de Control: ${locScore} puntos</h4>
+                <p><b>${locScore <= 11 ? 'Orientación Interna' : 'Orientación Externa'}</b></p>
+                <p><i>Contexto:</i> Como gestor, un <b>Locus Interno</b> (0-11) significa que asumes la responsabilidad de la comunicación con tu equipo. Un <b>Locus Externo</b> (>12) sugiere que podrías culpar a las circunstancias por los problemas de relación, lo cual limita tu capacidad de liderazgo proactivo.</p>
             </div>
-            <div class="interpretation-box">
-                <h4>3. Tolerancia a la Ambigüedad (${ambTotal})</h4>
-                <p>${ambTotal > 48 ? "<b>Alta Tolerancia:</b> Te sientes cómodo en situaciones complejas o inciertas [cite: 120]." : "<b>Intolerancia:</b> Prefieres entornos claros y predecibles; la incertidumbre puede generarte estrés."}</p>
+            <div class="feedback-item">
+                <h4>Tolerancia a la Ambigüedad: ${ambTotal} pts</h4>
+                <p><b>${ambTotal > 48 ? 'Alta Tolerancia' : 'Baja Tolerancia / Necesidad de Estructura'}</b></p>
+                <p><i>Contexto:</i> La gestión de relaciones es intrínsecamente ambigua. Si tienes <b>Baja Tolerancia</b>, podrías sentirte frustrado ante respuestas poco claras de colegas. Si es <b>Alta</b>, te mueves con facilidad en entornos de cambio constante pero podrías descuidar detalles importantes.</p>
             </div>
         `;
         window.scrollTo(0, document.body.scrollHeight);
     }
 
     function switchTab(n) {
-        document.querySelectorAll('.tab').forEach((el, i) => el.classList.toggle('active', i === n));
-        document.querySelectorAll('.tab-content').forEach((el, i) => el.classList.toggle('active', i === n));
+        const ts = document.querySelectorAll('.tab');
+        const cs = document.querySelectorAll('.tab-content');
+        ts.forEach((t, i) => t.classList.toggle('active', i === n));
+        cs.forEach((c, i) => c.classList.toggle('active', i === n));
     }
 
     init();
