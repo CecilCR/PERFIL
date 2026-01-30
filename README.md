@@ -1,103 +1,54 @@
-Perfil de autoconocimiento - Whetten & Cameron
+Perfil de autoconocimiento profesional: Whetten & Cameron
+Esta herramienta interactiva permite la evaluación diagnóstica de competencias individuales basándose en el marco teórico de Whetten y Cameron (2014) en su obra Desarrollo de habilidades directivas. Está diseñada para fomentar la reflexión crítica sobre el estilo de procesamiento de información y la adaptabilidad ante el entorno.
 
-Herramienta interactiva para evaluar habilidades directivas basada en los instrumentos de **Whetten y Cameron (2014)**: *Desarrollo de habilidades directivas*.
----
+Propósito de la herramienta
+La aplicación facilita el diagnóstico de tres constructos psicológicos fundamentales para la gestión directiva y el liderazgo:
 
-¿Qué es esta herramienta?
+Estilo cognoscitivo: Evalúa la inclinación individual para percibir, interpretar y responder a la información. Se analiza a través de las dimensiones de Conocimiento, Planeación y Creatividad.
 
-Esta aplicación web permite a estudiantes y profesionales evaluar tres dimensiones clave del autoconocimiento directivo:
+Locus de control: Determina la actitud del individuo respecto al grado de control que ejerce sobre su propio destino.
 
-1. **Estilo Cognoscitivo** - ¿Cómo procesas la información? (Conocer vs Crear)
-2. **Locus de Control** - ¿Qué tanto control tienes sobre tu vida? (Interno vs Externo)
-3. **Tolerancia a la Ambigüedad** - ¿Cómo manejas la incertidumbre? (Alta, Moderada, Baja)
-
----
-
-Características
-
-✅ **63 preguntas validadas** según Whetten & Cameron (2014)  
-✅ **Cálculo automático** de puntajes e interpretaciones  
-✅ **Gráfico radar** para visualizar tu perfil completo  
-✅ **Guardado automático** de respuestas (no se pierden al cerrar)  
-✅ **Exportación de resultados** a archivo de texto  
-✅ **Responsive** - funciona en celular, tablet y PC  
-✅ **Sin instalación** - solo abre el enlace en tu navegador  
-
----
-
-¿Cómo usar el cuestionario?
+Tolerancia a la Ambigüedad: Mide la capacidad de afrontar situaciones inciertas, complejas o sobrecargadas de información sin experimentar amenaza.
 
 
-1. **Accede al cuestionario** haciendo clic en el enlace proporcionado por tu profesor
-2. **Responde con honestidad** las 63 preguntas (se dividen en 3 secciones)
-3. **Navega entre pestañas** usando los botones superiores
-4. **Genera tu perfil** haciendo clic en "Generar Perfil de Autoconocimiento"
-5. **Descarga tus resultados** usando el botón "Descargar Reporte"
-6. **Imprime o guarda** tu perfil para incluirlo en tu reflexión personal
+Guía de Aplicación
+Acceso: Inicie el cuestionario mediante el enlace proporcionado.
 
-> 💡 **Tip:** Tus respuestas se guardan automáticamente. Puedes cerrar el navegador y continuar después.
+Navegación: Utilice las pestañas superiores para transitar entre las tres secciones.
 
----
+Ejecución: Seleccione su respuesta marcando directamente los botones numéricos o de opción.
 
-Estructura del cuestionario
+Resultados: Al finalizar todos los reactivos, haga clic en "Generar Diagnóstico Profesional".
 
-1️Estilo Cognoscitivo (18 preguntas)
-- **Escala:** 1 (Totalmente en desacuerdo) a 5 (Totalmente de acuerdo)
-- **Mide:** Tu preferencia entre analizar información (Conocer) o generar ideas nuevas (Crear)
-- **Tiempo estimado:** 5 minutos
+Evidencia: Descargue o imprima su reporte para la fase de reflexión escrita.
 
-2️⃣ Locus de Control (29 preguntas)
-- **Formato:** Selección entre dos opciones (a o b)
-- **Mide:** Si crees que controlas tu destino (Interno) o que factores externos te controlan (Externo)
-- **Tiempo estimado:** 8 minutos
+Estructura y Escalas
+1. Estilo Cognoscitivo (18 reactivos)
+Escala: 1 (Totalmente en desacuerdo) a 5 (Totalmente de acuerdo).
 
-3️⃣ Tolerancia a la Ambigüedad (16 preguntas)
-- **Escala:** 1 (Totalmente en desacuerdo) a 7 (Totalmente de acuerdo)
-- **Mide:** Tu capacidad para manejar situaciones inciertas o ambiguas
-- **Tiempo estimado:** 5 minutos
+Enfoque: Determina si su tendencia es hacia el Conocimiento (hechos y lógica), la Planeación (estructura y metodología) o la Creatividad (innovación y espontaneidad).
 
-Tiempo total:** Aproximadamente 20 minutos
+2. Locus de Control (29 reactivos)
+Formato: Elección forzada entre pares de enunciados (a o b).
 
----
+Enfoque: Identifica si posee un Locus Interno (asunción de responsabilidad personal) o Externo (atribución a fuerzas ajenas como la suerte o el destino).
 
-Interpretación de resultados
+3. Tolerancia a la Ambigüedad (16 reactivos)
+Escala: 1 (Totalmente en desacuerdo) a 7 (Totalmente de acuerdo).
 
-### Estilo Cognoscitivo
-- **CONOCER (Analítico):** Prefieres analizar información, entender a profundidad y tomar decisiones basadas en datos
-- **CREAR (Innovador):** Prefieres generar ideas nuevas, experimentar y buscar soluciones creativas
+Enfoque: Mide la complejidad cognoscitiva ante la Novedad, la Complejidad y la Insolubilidad.
 
-### Locus de Control
-- **INTERNO (0-11 puntos):** Crees que tú controlas tus resultados mediante tus acciones
-- **EXTERNO (12-24 puntos):** Crees que factores externos (suerte, destino) controlan tus resultados
+Interpretación Académica (Resumen)
+Estilo Cognoscitivo: Representa inclinaciones de aprendizaje y respuesta que son susceptibles de modificación mediante la práctica consciente.
 
-### Tolerancia a la Ambigüedad
-- **BAJA (<44 puntos):** Prefieres claridad, estructura y situaciones predecibles
-- **MODERADA (44-48 puntos):** Equilibrio entre necesidad de estructura y flexibilidad
-- **ALTA (>48 puntos):** Te sientes cómodo con incertidumbre y cambios
+Locus de Control: Define la "expectativa generalizada" sobre la fuente de reforzamiento en un entorno cambiante.
 
----
+Tolerancia a la Ambigüedad: Una alta tolerancia indica un comportamiento más adaptable y flexible, aunque puede conllevar una menor concentración al atender múltiples señales simultáneamente.
 
+Fundamento Teórico
+Este instrumento es una transposición tecnológica de:
 
+Whetten, D. A., & Cameron, K. S. (2014). Desarrollo de habilidades directivas (9ª ed.). Pearson Educación.
 
-Fundamento teórico
-
-Este cuestionario está basado en:
-
-**Whetten, D. A., & Cameron, K. S. (2014).** *Desarrollo de habilidades directivas* (9ª ed.). Pearson Educación.
-
-Los instrumentos incluidos son:
-- Indicador del Estilo Cognoscitivo (pp. 51-52)
-- Escala de Locus de Control (pp. 53-54)
-- Escala de Tolerancia a la Ambigüedad (pp. 55-56)
-
----
-
- 🔒 Privacidad
-
-- ✅ **Todos los datos se guardan localmente** en tu navegador
-- ✅ **No se envían datos a ningún servidor**
-- ✅ **No se recopila información personal**
-- ✅ **Solo tú tienes acceso a tus resultados**
-
----
+Nota Pedagógica: Recuerde que este perfil no define su personalidad de forma estática, sino que revela tendencias actuales que sirven como punto de partida para su desarrollo profesional.
 
