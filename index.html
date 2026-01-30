@@ -3,42 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Autoconocimiento - Gestión de las Relaciones</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Perfil de Autoconocimiento Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #1a4d2e; --accent: #ffd700; --bg: #faf8f3; --text: #2b2b2b; }
         body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
         .header { background: var(--primary); color: white; padding: 2.5rem; text-align: center; border-bottom: 5px solid var(--accent); }
         .container { max-width: 850px; margin: 2rem auto; padding: 0 1.5rem; }
-        
         .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-        .tab { flex: 1; padding: 12px; background: #eee; border: none; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 600; transition: 0.3s; min-width: 150px; }
+        .tab { flex: 1; padding: 12px; background: #eee; border: none; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 600; min-width: 150px; }
         .tab.active { background: var(--primary); color: white; }
-
-        .tab-content { display: none; background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .tab-content { display: none; background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .tab-content.active { display: block; }
-
         .question { border-bottom: 1px solid #eee; padding: 25px 0; }
         .options-container { display: flex; justify-content: space-between; margin-top: 15px; gap: 8px; }
-        .opt-btn { flex: 1; padding: 12px; border: 2px solid #ddd; background: white; border-radius: 8px; cursor: pointer; transition: 0.2s; font-weight: bold; font-size: 1rem; }
-        .opt-btn:hover { border-color: var(--primary); }
+        .opt-btn { flex: 1; padding: 12px; border: 2px solid #ddd; background: white; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.1rem; }
         .opt-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
-        
-        .scale-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: #777; margin-top: 8px; font-weight: 600; text-transform: uppercase; }
-
-        .btn-submit { background: var(--primary); color: white; border: none; padding: 1.5rem; border-radius: 12px; cursor: pointer; width: 100%; font-size: 1.2rem; font-weight: bold; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        
+        .scale-labels { display: flex; justify-content: space-between; font-size: 0.8rem; color: #777; margin-top: 8px; font-weight: 600; text-transform: uppercase; }
+        .btn-submit { background: var(--primary); color: white; border: none; padding: 1.5rem; border-radius: 12px; cursor: pointer; width: 100%; font-size: 1.2rem; font-weight: bold; margin-top: 30px; }
         .results-card { display: none; margin-top: 2rem; background: white; padding: 2.5rem; border-radius: 20px; border-top: 10px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .feedback-item { margin-bottom: 30px; padding: 20px; border-radius: 12px; background: #fdfdfd; border-left: 5px solid var(--primary); }
-        .feedback-item h3 { color: var(--primary); margin-top: 0; font-family: 'Playfair Display', serif; }
-        .sub-score { background: #f0f4f1; padding: 10px; border-radius: 5px; font-weight: 600; display: inline-block; margin-bottom: 10px; }
+        .feedback-item { margin-bottom: 30px; padding: 25px; border-radius: 12px; background: #fdfdfd; border-left: 6px solid var(--primary); }
+        .feedback-item h3 { color: var(--primary); margin-top: 0; font-family: 'Playfair Display', serif; border-bottom: 2px solid var(--accent); display: inline-block; margin-bottom: 15px; }
+        .sub-score { background: #f0f4f1; padding: 10px 20px; border-radius: 5px; font-weight: 600; display: inline-block; margin-bottom: 15px; color: var(--primary); }
     </style>
 </head>
 <body>
 
 <div class="header">
     <h1>Perfil de Autoconocimiento</h1>
-    <p>Basado en Whetten & Cameron (2014)</p>
+    <p>Instrumentos de Evaluación Académica | Whetten & Cameron</p>
 </div>
 
 <div class="container">
@@ -52,21 +45,21 @@
         <div class="tab-content active" id="tab0"><div id="cogBox"></div></div>
         <div class="tab-content" id="tab1"><div id="locBox"></div></div>
         <div class="tab-content" id="tab2"><div id="ambBox"></div></div>
-        <button type="button" class="btn-submit" onclick="processResults()">Generar Diagnóstico Profesional</button>
+        <button type="button" class="btn-submit" onclick="processResults()">Generar Diagnóstico Académico</button>
     </form>
 
     <div id="results" class="results-card">
-        <h2 style="text-align:center; font-family: 'Playfair Display', serif;">Informe de Perfil Individual</h2>
+        <h2 style="text-align:center; font-family: 'Playfair Display', serif;">Informe de Diagnóstico Profesional</h2>
         <div id="resOutput"></div>
-        <button class="btn-submit" style="background:#444" onclick="window.print()">Imprimir o Guardar Reporte</button>
+        <button class="btn-submit" style="background:#444" onclick="window.print()">Descargar Reporte (PDF)</button>
     </div>
 </div>
 
 <script>
-    // PREGUNTAS ORIGINALES DE WHETTEN
+    // PREGUNTAS ORIGINALES DEL DOCUMENTO
     const cogQs = ["Para mí es muy importante la elaboración de un plan claro.", "Me gusta contribuir a soluciones innovadoras.", "Siempre me gusta saber qué se debe hacer y cuándo.", "Prefiero buscar soluciones creativas.", "Me gusta entender plenamente un problema.", "Me gustan los planes de acción detallados.", "Me siento motivado por la innovación continua.", "Me gusta analizar los problemas.", "Prefiero contar con una estructura clara para hacer mi trabajo.", "Me gusta tener una gran variedad en mi vida.", "Realizo análisis detallados.", "Prefiero las reuniones bien planeadas y con una agenda clara.", "Me atraen más las ideas nuevas que las soluciones ya existentes.", "Estudio cada problema hasta entender la lógica subyacente.", "Tomo decisiones definitivas y hago seguimientos meticulosos.", "Me gusta extender los límites.", "Una buena tarea es una tarea bien preparada.", "Trato de evitar la rutina."];
-    const locQs = [{a:"Los líderes nacen.", b:"Los líderes se hacen."}, {a:"El éxito es suerte.", b:"El éxito es trabajo duro."}, {a:"Mis errores.", b:"Calamidades inevitables."}, {a:"Líderes causan guerras.", b:"Guerras inevitables."}, {a:"Buenos padres.", b:"Niños malos inevitablemente."}, {a:"Futuro depende de circunstancias.", b:"Dueño de mi destino."}, {a:"Historia y suerte.", b:"Acciones decisivas."}, {a:"Castigo criminal.", b:"No disciplina física."}, {a:"Poca influencia.", b:"Suerte crucial."}, {a:"Clientes insatisfechos.", b:"Satisfacer es posible."}, {a:"Esfuerzo escolar.", b:"Niños que no destacan."}, {a:"Compatibilidad.", b:"Trabajar matrimonio."}, {a:"Mejorar con clase.", b:"Pérdida tiempo."}, {a:"Más cursos gestión.", b:"Menos énfasis."}, {a:"Mérito propio.", b:"Causas externas."}, {a:"Examen injusto.", b:"Estudiar rinde."}, {a:"Horóscopo.", b:"Yo determino."}, {a:"Gobierno intocable.", b:"Influencia ciudadana."}, {a:"Responsabilidad.", b:"Poco trabajo."}, {a:"Carisma nato.", b:"Conducta admirada."}, {a:"Fuera de control.", b:"Responsable logros."}, {a:"Habilidad directiva.", b:"Suerte y momento."}, {a:"Suerte deportiva.", b:"Habilidad técnica."}, {a:"Capacitación equipo.", b:"Esfuerzo individual."}, {a:"Perezosos.", b:"Motivables."}, {a:"Acción responsable.", b:"Economía externa."}, {a:"Persuasivo.", b:"Convencer sin razón."}, {a:"Planear metas.", b:"Sale bien igual."}, {a:"Destinado.", b:"Trabajo duro"}];
-    const ambQs = ["Experto sin respuesta definitiva.", "Me gustaría vivir en el extranjero.", "No existe problema sin solución.", "Horarios pierden alegría.", "Buen trabajo es claro.", "Problema complicado es divertido.", "Problemas sencillos rinden más.", "Personas interesantes.", "Familiar es preferible.", "Respuesta sí o no.", "Vida estable.", "Información insuficiente.", "Fiestas con conocidos.", "Tareas ambiguas e iniciativa.", "Valores similares.", "Maestro que hace pensar."];
+    const locQs = [{a:"Los líderes nacen, no se hacen.", b:"Los líderes se hacen, no nacen."}, {a:"La gente a menudo tiene éxito porque está en el lugar correcto en el momento adecuado.", b:"El éxito depende en su mayoría del trabajo arduo y la capacidad."}, {a:"Cuando las cosas van mal en mi vida, generalmente es porque cometí errores.", b:"Las calamidades ocurren en mi vida sin importar lo que yo haga."}, {a:"El hecho de que haya guerra o no depende de las acciones de ciertos líderes mundiales.", b:"Es inevitable que el mundo continúe sufriendo guerras."}, {a:"Los hijos buenos son principalmente el resultado de buenos padres.", b:"Algunos hijos se vuelven malos sin importar cómo se comporten sus padres."}, {a:"Mi éxito futuro depende principalmente de circunstancias que escapan a mi control.", b:"Soy el dueño de mi destino."}, {a:"La historia juzga que ciertas personas fueron líderes eficaces principalmente porque las circunstancias los hicieron visibles y exitosos.", b:"Los líderes eficaces son aquellos que toman decisiones o acciones que dan como resultado contribuciones significativas."}, {a:"Evitar el castigo a los niños garantiza que crecerán como personas irresponsables.", b:"Nunca es apropiado disciplinar físicamente a los niños."}, {a:"A menudo siento que tengo poca influencia en la dirección que está tomando mi vida.", b:"No es razonable pensar que el destino o la suerte tienen importancia crucial en la dirección de mi vida."}, {a:"Algunos clientes nunca estarán satisfechos sin importar lo que uno haga.", b:"Uno puede satisfacer a los clientes al darles lo que desean cuando lo desean."}, {a:"Cualquier persona puede obtener buenos resultados en la escuela si trabaja con el esfuerzo suficiente.", b:"Algunas personas nunca destacarán en la escuela sin importar lo mucho que se esfuercen."}, {a:"Los buenos matrimonios resultan cuando ambos cónyuges trabajan continuamente en la relación.", b:"Algunos matrimonios fracasan porque los cónyuges simplemente son incompatibles."}, {a:"Tengo confianza en que puedo mejorar mis habilidades básicas de liderazgo a través del aprendizaje y la práctica.", b:"Es una pérdida de tiempo tratar de mejorar las habilidades de liderazgo en un salón de clases."}, {a:"Deberían enseñarse más cursos de habilidades de liderazgo en las escuelas de negocios.", b:"Se debe poner menos énfasis en las habilidades de liderazgo dentro de las escuelas de negocios."}, {a:"Cuando recuerdo las cosas buenas que me han sucedido, pienso que pasaron porque hice algo bueno.", b:"Las cosas malas que han pasado en mi vida son resultado principalmente de circunstancias fuera de mi control."}, {a:"Muchos de los exámenes que presenté en la escuela no tenían conexión con el material que yo había estudiado.", b:"Cuando me preparaba bien para los exámenes en la escuela, generalmente obtenía un buen resultado."}, {a:"A veces me veo influido por lo que dice mi horóscopo.", b:"Sin importar la posición de los astros, puedo determinar mi propio destino."}, {a:"El gobierno es tan grande y burocrático, que es muy difícil que alguien provoque un efecto.", b:"Los individuos pueden tener una influencia real en la política si dan a conocer sus deseos."}, {a:"Las personas buscan responsabilidad en el trabajo.", b:"Las personas tratan de salirse con la suya trabajando lo menos posible."}, {a:"Los individuos más populares parecen tener un carisma especial inherente.", b:"Los individuos se vuelven populares por su comportamiento."}, {a:"En mi vida parecen suceder cosas sobre las que tengo poco control.", b:"La mayor parte del tiempo me siento responsable por los resultados que obtengo."}, {a:"Los directivos que mejoren su competencia personal tendrán mayor éxito.", b:"El éxito directivo tiene poco que ver con la competencia que posea el director."}, {a:"Los equipos que ganan campeonatos generalmente son los que tienen más suerte.", b:"Los equipos que ganan son aquellos que tienen a los jugadores más hábiles."}, {a:"El trabajo en equipo en los negocios es un requisito para el éxito.", b:"El esfuerzo individual es la mejor clave del éxito."}, {a:"Algunos empleados simplemente son perezosos y no se les puede motivar.", b:"Si usted es un directivo hábil, puede motivar a casi cualquier empleado."}, {a:"A la larga, las personas pueden mejorar la fuerza económica a través de acciones responsables.", b:"La salud económica está, en gran parte, más allá del control de los individuos."}, {a:"Soy persuasivo cuando sé que tengo razón.", b:"Soy capaz de convencer a la gente aun cuando no esté seguro de estar en lo correcto."}, {a:"Tiendo a planear con anticipación mis metas.", b:"Rara vez planeo el futuro porque las cosas salen bien de cualquier forma."}, {a:"Algunas cosas simplemente están destinadas a suceder.", b:"Podemos cambiar cualquier cosa en nuestra vida con trabajo arduo y habilidad."}];
+    const ambQs = ["Un experto al que no se le ocurre una respuesta definitiva probablemente no sepa demasiado.", "Me gustaría vivir en el extranjero durante un tiempo.", "No existe tal cosa como un problema sin solución.", "La gente que ajusta su vida a un horario probablemente se pierde casi toda la alegría.", "Un buen trabajo es aquel en el que siempre está claro lo que se debe hacer.", "Es más divertido atacar un problema complicado que resolver uno sencillo.", "Es posible realizar más cosas resolviendo problemas sencillos que grandes y complicados.", "Personas interesantes son aquellas a las que no les importa ser diferentes.", "Siempre es preferible algo familiar que algo extraño.", "Quienes insisten en una respuesta de sí o no desconocen lo compleja que es la vida.", "Una persona que lleva una vida estable tiene mucho que agradecer.", "Muchas de nuestras decisiones importantes se basan en información insuficiente.", "Prefiero las fiestas en las que conozco a la mayoría de las personas.", "Los maestros que asignan tareas ambiguas dan oportunidad para mostrar iniciativa.", "Cuanto más pronto todos adquiramos valores e ideales similares, mejor.", "Un buen maestro es aquel que hace pensar al alumno."];
 
     function init() {
         const cogBox = document.getElementById('cogBox');
@@ -77,16 +70,14 @@
                 </div>
                 <div class="scale-labels"><span>Totalmente en desacuerdo</span><span>Totalmente de acuerdo</span></div></div>`;
         });
-
         const locBox = document.getElementById('locBox');
         locQs.forEach((q, i) => {
-            locBox.innerHTML += `<div class="question"><p><strong>${i+1}.</strong> Seleccione:</p>
+            locBox.innerHTML += `<div class="question"><p><strong>${i+1}.</strong> Seleccione su opción:</p>
                 <div class="options-container">
                     <button type="button" class="opt-btn" id="loc_${i+1}_a" onclick="setRadio(${i+1}, 'a')">a) ${q.a}</button>
                     <button type="button" class="opt-btn" id="loc_${i+1}_b" onclick="setRadio(${i+1}, 'b')">b) ${q.b}</button>
                 </div></div>`;
         });
-
         const ambBox = document.getElementById('ambBox');
         ambQs.forEach((q, i) => {
             ambBox.innerHTML += `<div class="question"><p><strong>${i+1}.</strong> ${q}</p>
@@ -98,13 +89,11 @@
     }
 
     let vals = { cog: {}, loc: {}, amb: {} };
-
     function setVal(type, id, v) {
         vals[type][id] = v;
         const btns = document.getElementById(`${type}_row_${id}`).querySelectorAll('.opt-btn');
         btns.forEach(b => b.classList.toggle('selected', parseInt(b.innerText) === v));
     }
-
     function setRadio(id, val) {
         vals.loc[id] = val;
         document.getElementById(`loc_${id}_a`).classList.toggle('selected', val === 'a');
@@ -116,11 +105,9 @@
         const sConoc = (getC(5)+getC(8)+getC(11)+getC(14))/4;
         const sPlan = (getC(1)+getC(3)+getC(6)+getC(9)+getC(12)+getC(15)+getC(17))/7;
         const sCreat = (getC(2)+getC(4)+getC(7)+getC(10)+getC(13)+getC(16)+getC(18))/7;
-
         let locScore = 0;
         const extKeys = ["2a","3b","4b","5b","6a","7a","9a","10a","11b","12b","13b","15b","16a","17a","18a","20a","21a","22b","23a","25a","26b","28b","29a"];
         extKeys.forEach(k => { if(vals.loc[k.slice(0,-1)] === k.slice(-1)) locScore++; });
-
         let ambTotal = 0;
         for(let i=1; i<=16; i++) { let v = vals.amb[i] || 4; if(i%2===0) v = 8-v; ambTotal += v; }
 
@@ -129,32 +116,21 @@
             <div class="feedback-item">
                 <h3>Estilo Cognoscitivo</h3>
                 <div class="sub-score">Conocimiento: ${sConoc.toFixed(1)} | Planeación: ${sPlan.toFixed(1)} | Creativo: ${sCreat.toFixed(1)}</div>
-                <p>El estilo cognoscitivo se refiere a tu inclinación para percibir e interpretar información. No es personalidad, sino una tendencia de aprendizaje que puedes modificar.</p>
-                <p><b>Interpretación:</b><br>
-                - <b>Conocimiento:</b> Valoras hechos, datos y soluciones claras basadas en la lógica.<br>
-                - <b>Planeación:</b> Prefieres estructura, preparación y métodos sistemáticos.<br>
-                - <b>Creativo:</b> Te sientes cómodo en la incertidumbre, buscas novedad y experimentación.</p>
+                <p>El estilo cognoscitivo representa tu inclinación para percibir, interpretar y responder a la información. Es una tendencia susceptible de alteración mediante la práctica consciente.</p>
+                <p><b>Dimensiones detectadas:</b><br>
+                - <b>Estilo de Conocimiento:</b> Priorizas hechos, datos y soluciones racionales. Evalúas la exactitud de la información antes de actuar.<br>
+                - <b>Estilo de Planeación:</b> Te inclinas hacia la estructura y la metodología sistemática. Prefieres agendas claras y procesos convencionales.<br>
+                - <b>Estilo Creativo:</b> Prefieres la experimentación y la espontaneidad. Te sientes cómodo reestructurando situaciones singulares.</p>
             </div>
             <div class="feedback-item">
                 <h3>Locus de Control: ${locScore} pts</h3>
-                <div class="sub-score">Orientación: ${locScore <= 11 ? 'Interna' : 'Externa'}</div>
-                <p>Se refiere a qué tanto sientes que controlas tu destino. Un <b>Locus Interno</b> (puntaje bajo) indica que ves los resultados como fruto de tus acciones. Un <b>Locus Externo</b> (puntaje alto) indica que atribuyes los eventos a fuerzas externas como la suerte o el destino.</p>
+                <div class="sub-score">Perfil: ${locScore <= 11 ? 'Interno' : 'Externo'}</div>
+                <p>Define tu actitud respecto al control de tu propio destino.<br>
+                - <b>Interno:</b> Atribuyes tus éxitos y fracasos a tus propias acciones.<br>
+                - <b>Externo:</b> Percibes que los resultados dependen de fuerzas fuera de tu control, como la suerte o el destino.</p>
             </div>
             <div class="feedback-item">
                 <h3>Tolerancia a la Ambigüedad: ${ambTotal} pts</h3>
-                <div class="sub-score">Perfil: ${ambTotal > 48 ? 'Alta Complejidad' : 'Necesidad de Estructura'}</div>
-                <p>Es el grado en que te sientes cómodo ante cambios imprevistos o información incompleta. Los individuos con alta tolerancia (puntaje alto) suelen ser más adaptables y flexibles en entornos complejos, aunque pueden distraerse con mayor facilidad.</p>
-                <p><b>Subescalas:</b> Novedad (situaciones desconocidas), Complejidad (información múltiple) e Insolubilidad (problemas difíciles de resolver).</p>
-            </div>
-        `;
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-    function switchTab(n) {
-        document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === n));
-        document.querySelectorAll('.tab-content').forEach((c, i) => c.classList.toggle('active', i === n));
-    }
-    init();
-</script>
-</body>
-</html>
+                <div class="sub-score">Estado: ${ambTotal > 48 ? 'Alta Complejidad' : 'Necesidad de Estructura'}</div>
+                <p>Es tu capacidad para afrontar cambios imprevistos o información incompleta sin sentirte amenazado.<br>
+                - <b>Alta Tolerancia:</b> Muestras mayor adaptabilidad y flexibilidad en
