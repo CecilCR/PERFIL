@@ -1,4 +1,5 @@
-Guía de utoconocimiento: Gestión de las Relaciones
+Guía de autoconocimiento
+
 Este repositorio contiene la herramienta digital para realizar el ejercicio de perfil basado en la metodología de Whetten y Cameron (2014). El objetivo es identificar rasgos personales clave para mejorar la efectividad directiva y la gestión de equipos.
 
 Instrucciones
