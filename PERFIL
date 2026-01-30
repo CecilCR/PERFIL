@@ -3,112 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App de Autoconocimiento - Gestión de las Relaciones</title>
+    <title>Evaluación Directiva - Whetten & Cameron</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .card { border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .header-section { background: #003366; color: white; padding: 2rem 0; border-bottom: 5px solid #00a8e8; }
-        .btn-primary { background-color: #003366; border: none; }
-        .btn-primary:hover { background-color: #001f40; }
-        .question-text { font-weight: 500; color: #333; }
+        body { background-color: #f8f9fa; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .header-app { background: linear-gradient(135deg, #003366 0%, #00509d 100%); color: white; padding: 40px 0; border-bottom: 5px solid #00a8e8; margin-bottom: 30px; }
+        .card { border-radius: 15px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        .nav-pills .nav-link { color: #003366; font-weight: 600; border: 1px solid #003366; margin: 0 5px; }
+        .nav-pills .nav-link.active { background-color: #003366; color: white; }
+        .question-row { padding: 15px 0; border-bottom: 1px solid #eee; transition: background 0.2s; }
+        .question-row:hover { background-color: #fcfcfc; }
+        .btn-primary { background-color: #003366; border: none; padding: 15px 40px; font-weight: bold; font-size: 1.1rem; }
+        .result-box { display: none; background: #fff; border-top: 5px solid #003366; padding: 30px; border-radius: 15px; }
     </style>
 </head>
 <body>
 
-<div class="header-section text-center">
-    <h1>Evaluación de Perfil Directivo</h1>
-    <p>Basado en Whetten y Cameron (2014)</p>
+<div class="header-app text-center">
+    <div class="container">
+        <h1>PERFIL DE AUTOCONOCIMIENTO</h1>
+        <p class="lead">Instrumentos de Evaluación de Habilidades Directivas</p>
+    </div>
 </div>
 
-<div class="container mt-5">
-    <div id="quiz-container">
-        <div class="card p-4">
-            <h3>1. Indicador del Estilo Cognoscitivo</h3>
-            [cite_start]<p class="text-muted">Valora cómo reúne información, la evalúa y toma decisiones[cite: 2].</p>
-            <hr>
-            <form id="cognitive-form">
-                <div class="mb-3">
-                    <p class="question-text">1. [cite_start]Para mí es muy importante la elaboración de un plan claro[cite: 11].</p>
-                    <input type="range" class="form-range" min="1" max="5" step="1" id="q1" name="q1">
-                    <div class="d-flex justify-content-between small"><span>Desacuerdo</span><span>Acuerdo</span></div>
+<div class="container mb-5">
+    <ul class="nav nav-pills nav-justified mb-4" id="pills-tab" role="tablist">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1">1. Estilo Cognoscitivo</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2">2. Locus de Control</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3">3. Tolerancia a la Ambigüedad</button></li>
+    </ul>
+
+    <form id="masterQuiz">
+        <div class="tab-content" id="pills-tabContent">
+            
+            <div class="tab-pane fade show active" id="tab1">
+                <div class="card p-4">
+                    <h3>Indicador del Estilo Cognoscitivo</h3>
+                    <p class="text-muted">Escala: 1 (Totalmente en desacuerdo) a 5 (Totalmente de acuerdo).</p>
+                    <div id="cog-container"></div>
                 </div>
-                <div class="mb-3">
-                    <p class="question-text">2. [cite_start]Me gusta contribuir a soluciones innovadoras[cite: 11].</p>
-                    <input type="range" class="form-range" min="1" max="5" id="q2">
+            </div>
+
+            <div class="tab-pane fade" id="tab2">
+                <div class="card p-4">
+                    <h3>Escala de Locus de Control</h3>
+                    <p class="text-muted">Seleccione la opción (a o b) con la que esté más de acuerdo.</p>
+                    <div id="locus-container"></div>
                 </div>
-                <div class="mb-3">
-                    <p class="question-text">4. [cite_start]Prefiero buscar soluciones creativas[cite: 11].</p>
-                    <input type="range" class="form-range" min="1" max="5" id="q4">
+            </div>
+
+            <div class="tab-pane fade" id="tab3">
+                <div class="card p-4">
+                    <h3>Escala de Tolerancia a la Ambigüedad</h3>
+                    <p class="text-muted">Escala: 1 (Totalmente en desacuerdo) a 7 (Totalmente de acuerdo).</p>
+                    <div id="amb-container"></div>
                 </div>
-            </form>
+            </div>
         </div>
 
-        <div class="card p-4">
-            <h3>2. Escala de Locus de Control</h3>
-            [cite_start]<p class="text-muted">Seleccione la opción con la que más se identifique[cite: 15].</p>
-            <hr>
-            <form id="locus-form">
-                <div class="mb-4">
-                    <p class="question-text">Pregunta 1:</p>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="locus1" value="a" id="l1a">
-                        <label class="form-check-label" for="l1a">a. [cite_start]Los líderes nacen, no se hacen[cite: 18].</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="locus1" value="b" id="l1b">
-                        <label class="form-check-label" for="l1b">b. [cite_start]Los líderes se hacen, no nacen[cite: 19].</label>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <p class="question-text">Pregunta 6:</p>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="locus6" value="a" id="l6a">
-                        <label class="form-check-label" for="l6a">a. [cite_start]Mi éxito futuro depende principalmente de circunstancias externas[cite: 28].</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="locus6" value="b" id="l6b">
-                        <label class="form-check-label" for="l6b">b. [cite_start]Soy el dueño de mi destino[cite: 29].</label>
-                    </div>
-                </div>
-            </form>
+        <div class="text-center mt-4">
+            <button type="button" class="btn btn-primary btn-lg" onclick="procesarPerfil()">Generar Perfil Individual</button>
         </div>
+    </form>
 
-        <div class="text-center mb-5">
-            <button class="btn btn-primary btn-lg" onclick="calcularResultados()">Generar Perfil Individual</button>
+    <div id="results-area" class="card result-box mt-5">
+        <h2 class="text-center text-primary mb-4">Análisis de Perfil</h2>
+        <div id="results-content"></div>
+        <div class="text-center mt-4">
+            <button class="btn btn-outline-secondary" onclick="window.print()">Imprimir Reporte</button>
         </div>
-    </div>
-
-    <div id="results-area" class="card p-4 d-none">
-        <h2 class="text-center text-primary">Tu Perfil de Gestión</h2>
-        <div id="analysis-content" class="mt-3"></div>
-        <button class="btn btn-outline-secondary mt-3" onclick="window.print()">Imprimir Reporte</button>
     </div>
 </div>
 
 <script>
-    function calcularResultados() {
-        const q1 = parseInt(document.getElementById('q1').value);
-        const l6 = document.querySelector('input[name="locus6"]:checked')?.value;
-        
-        const resultsArea = document.getElementById('results-area');
-        const content = document.getElementById('analysis-content');
-        
-        resultsArea.classList.remove('d-none');
-        
-        let perfilLocus = l6 === 'b' ? "Locus de Control Interno (Proactivo)" : "Locus de Control Externo (Reactivo)";
-        
-        content.innerHTML = `
-            <p><strong>Tendencia de Planificación:</strong> Tu nivel de acuerdo con planes claros es de ${q1}/5.</p>
-            <p><strong>Orientación de Control:</strong> Posees un <strong>${perfilLocus}</strong>.</p>
+    // Datos de Whetten y Cameron (2014)
+    const cogData = [
+        "Para mí es muy importante la elaboración de un plan claro.",
+        "Me gusta contribuir a soluciones innovadoras.",
+        "Siempre me gusta saber qué se debe hacer y cuándo.",
+        "Prefiero buscar soluciones creativas.",
+        "Me gusta entender plenamente un problema.",
+        "Me gustan los planes de acción detallados.",
+        "Me siento motivado por la innovación continua.",
+        "Me gusta analizar los problemas.",
+        "Prefiero contar con una estructura clara para hacer mi trabajo.",
+        "Me gusta tener una gran variedad en mi vida.",
+        "Realizo análisis detallados.",
+        "Prefiero las reuniones bien planeadas y con una agenda clara.",
+        "Me atraen más las ideas nuevas que las soluciones ya existentes.",
+        "Estudio cada problema hasta entender la lógica subyacente.",
+        "Tomo decisiones definitivas y hago seguimientos meticulosos.",
+        "Me gusta extender los límites.",
+        "Una buena tarea es una tarea bien preparada.",
+        "Trato de evitar la rutina."
+    ];
+
+    const locusData = [
+        {id:1, a:"Los líderes nacen, no se hacen.", b:"Los líderes se hacen, no nacen.", f:true},
+        {id:2, a:"La gente tiene éxito por suerte/lugar adecuado.", b:"El éxito depende del trabajo arduo.", ext:"a"},
+        {id:3, a:"Si algo va mal, es porque cometí errores.", b:"Las calamidades ocurren sin importar qué haga.", ext:"b"},
+        {id:4, a:"La guerra depende de los líderes.", b:"Es inevitable que haya guerras.", ext:"b"},
+        {id:5, a:"Hijos buenos son por buenos padres.", b:"Hijos se vuelven malos sin importar los padres.", ext:"b"},
+        {id:6, a:"Mi éxito depende de circunstancias externas.", b:"Soy el dueño de mi destino.", ext:"a"},
+        {id:7, a:"La historia hace visibles a los líderes por suerte.", b:"Líderes eficaces toman acciones clave.", ext:"a"},
+        {id:8, a:"Evitar castigo crea irresponsabilidad.", b:"No es apropiado disciplinar físicamente.", f:true},
+        {id:9, a:"Tengo poca influencia en mi vida.", b:"El destino no es crucial en mi vida.", ext:"a"},
+        {id:10, a:"Clientes nunca estarán satisfechos.", b:"Se puede satisfacer al cliente dándole lo deseado.", ext:"a"},
+        {id:11, a:"Cualquiera tiene éxito en escuela con esfuerzo.", b:"Algunos nunca destacarán.", ext:"b"},
+        {id:12, a:"Buenos matrimonios requieren trabajo.", b:"Fracasan por ser incompatibles.", ext:"b"},
+        {id:13, a:"Puedo mejorar habilidades con aprendizaje.", b:"Es pérdida de tiempo tratar de mejorar en clase.", ext:"b"},
+        {id:14, a:"Deberían enseñarse más cursos de liderazgo.", b:"Debe haber menos énfasis en ellos.", f:true},
+        {id:15, a:"Cosas buenas pasaron porque hice algo bueno.", b:"Cosas malas son por causas fuera de control.", ext:"b"},
+        {id:16, a:"Exámenes no tenían conexión con lo estudiado.", b:"Si me preparaba, obtenía buen resultado.", ext:"a"},
+        {id:17, a:"Me influye el horóscopo.", b:"Determino mi propio destino.", ext:"a"},
+        {id:18, a:"El gobierno es muy grande para influir.", b:"Individuos tienen influencia real.", ext:"a"},
+        {id:19, a:"Personas buscan responsabilidad.", b:"Personas tratan de trabajar lo menos posible.", f:true},
+        {id:20, a:"Populares tienen carisma inherente.", b:"Se vuelven populares por comportamiento.", ext:"a"},
+        {id:21, a:"Suceden cosas sobre las que tengo poco control.", b:"Soy responsable de mis resultados.", ext:"a"},
+        {id:22, a:"Directivos hábiles tendrán más éxito.", b:"Éxito tiene poco que ver con competencia.", ext:"b"},
+        {id:23, a:"Equipos ganan por suerte.", b:"Ganan por habilidad y preparación.", ext:"a"},
+        {id:24, a:"Trabajo en equipo es requisito.", b:"Esfuerzo individual es la clave.", f:true},
+        {id:25, a:"Algunos empleados son perezosos.", b:"Directivo hábil puede motivar a casi todos.", ext:"a"},
+        {id:26, a:"Personas mejoran economía con responsabilidad.", b:"Salud económica está fuera de control individual.", ext:"b"},
+        {id:27, a:"Soy persuasivo si tengo razón.", b:"Convenzo aunque no esté seguro.", f:true},
+        {id:28, a:"Planeo con anticipación metas.", b:"Rara vez planeo porque sale bien igual.", ext:"b"},
+        {id:29, a:"Cosas están destinadas a suceder.", b:"Cambiamos la vida con trabajo duro.", ext:"a"}
+    ];
+
+    const ambData = [
+        "Un experto sin respuesta definitiva probablemente no sepa demasiado.",
+        "Me gustaría vivir en el extranjero durante un tiempo.",
+        "No existe tal cosa como un problema sin solución.",
+        "Quien ajusta su vida a un horario pierde alegría.",
+        "Un buen trabajo es donde siempre está claro qué hacer.",
+        "Es más divertido atacar un problema complicado.",
+        "Se logra más resolviendo problemas sencillos que grandes.",
+        "Personas interesantes no les importa ser originales.",
+        "Siempre es preferible lo familiar que lo extraño.",
+        "Quienes insisten en sí o no desconocen la complejidad.",
+        "Vida estable sin sorpresas es de agradecer.",
+        "Decisiones importantes se basan en información insuficiente.",
+        "Prefiero fiestas con conocidos que con extraños.",
+        "Tareas ambiguas dan oportunidad de iniciativa.",
+        "Cuanto antes tengamos valores similares, mejor.",
+        "Un buen maestro hace pensar al alumno."
+    ];
+
+    // Cargar Preguntas
+    window.onload = function() {
+        const c1 = document.getElementById('cog-container');
+        cogData.forEach((p, i) => {
+            c1.innerHTML += `<div class="question-row"><label class="form-label">${i+1}. ${p}</label><input type="range" class="form-range" min="1" max="5" id="cog_${i}"></div>`;
+        });
+        const c2 = document.getElementById('locus-container');
+        locusData.forEach(p => {
+            c2.innerHTML += `<div class="question-row"><p><b>${p.id}.</b> Seleccione:</p>
+                <input type="radio" name="loc_${p.id}" value="a"> a) ${p.a}<br>
+                <input type="radio" name="loc_${p.id}" value="b"> b) ${p.b}</div>`;
+        });
+        const c3 = document.getElementById('amb-container');
+        ambData.forEach((p, i) => {
+            c3.innerHTML += `<div class="question-row"><label class="form-label">${i+1}. ${p}</label><input type="range" class="form-range" min="1" max="7" id="amb_${i}"></div>`;
+        });
+    }
+
+    function procesarPerfil() {
+        let locScore = 0;
+        locusData.forEach(q => {
+            const sel = document.querySelector(`input[name="loc_${q.id}"]:checked`);
+            if(sel && !q.f && sel.value === q.ext) locScore++;
+        });
+
+        document.getElementById('results-area').style.display = 'block';
+        document.getElementById('results-content').innerHTML = `
             <div class="alert alert-info">
-                <strong>Reflexión Sugerida:</strong> ¿Cómo influye tu percepción de control en la gestión de tus relaciones académicas y profesionales?
+                <h4>Puntaje Locus de Control: ${locScore}</h4>
+                <p>${locScore <= 11 ? "<b>Interpretación: Locus de Control Interno.</b> Crees que tus resultados dependen de tus propias acciones." : "<b>Interpretación: Locus de Control Externo.</b> Crees que factores externos influyen en tus resultados."}</p>
             </div>
+            <p class="mt-4"><i>Complete el análisis detallado en su archivo REFLEXION.md basado en estos resultados.</i></p>
         `;
-        
         window.scrollTo(0, document.body.scrollHeight);
     }
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
