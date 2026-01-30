@@ -1,4 +1,4 @@
-Perfil de utoconocimiento: Whetten & Cameron
+Perfil de autoconocimiento: Whetten & Cameron
 Esta herramienta interactiva permite la evaluación diagnóstica de competencias individuales basándose en el marco teórico de Whetten y Cameron (2014) en su obra Desarrollo de habilidades directivas. Está diseñada para fomentar la reflexión crítica sobre el estilo de procesamiento de información y la adaptabilidad ante el entorno cambiante.
 
 Propósito de la herramienta
