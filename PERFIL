@@ -3,188 +3,1153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación Directiva - Whetten & Cameron</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>Perfil de Autoconocimiento - Whetten & Cameron</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .header-app { background: linear-gradient(135deg, #003366 0%, #00509d 100%); color: white; padding: 40px 0; border-bottom: 5px solid #00a8e8; margin-bottom: 30px; }
-        .card { border-radius: 15px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 25px; }
-        .nav-pills .nav-link { color: #003366; font-weight: 600; border: 1px solid #003366; margin: 0 5px; }
-        .nav-pills .nav-link.active { background-color: #003366; color: white; }
-        .question-row { padding: 15px 0; border-bottom: 1px solid #eee; transition: background 0.2s; }
-        .question-row:hover { background-color: #fcfcfc; }
-        .btn-primary { background-color: #003366; border: none; padding: 15px 40px; font-weight: bold; font-size: 1.1rem; }
-        .result-box { display: none; background: #fff; border-top: 5px solid #003366; padding: 30px; border-radius: 15px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a4d2e;
+            --primary-light: #2d6a4f;
+            --accent: #ffd700;
+            --bg: #faf8f3;
+            --text: #2b2b2b;
+            --border: #d4c5b0;
+            --shadow: rgba(26, 77, 46, 0.1);
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(135deg, #faf8f3 0%, #f5f0e8 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            position: relative;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -2rem auto 4rem;
+            padding: 0 1.5rem;
+        }
+
+        .progress-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .progress-track {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 30px var(--shadow);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .question {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s ease;
+        }
+
+        .question:hover {
+            background: #fafafa;
+            margin: 0 -1rem;
+            padding: 1.5rem 1rem;
+        }
+
+        .question-text {
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            margin-right: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .scale-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .scale-label {
+            font-size: 0.85rem;
+            color: #666;
+            min-width: 100px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 8px;
+            background: linear-gradient(to right, #e0e0e0 0%, #e0e0e0 100%);
+            border-radius: 10px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.2s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--primary-light);
+            transform: scale(1.1);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .range-value {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            background: #f8f8f8;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .radio-option:hover {
+            background: #f0f0f0;
+            border-color: var(--border);
+        }
+
+        .radio-option input[type="radio"] {
+            margin-top: 0.2rem;
+            margin-right: 1rem;
+            cursor: pointer;
+            accent-color: var(--primary);
+            width: 20px;
+            height: 20px;
+        }
+
+        .radio-option.selected {
+            background: rgba(26, 77, 46, 0.05);
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow);
+            display: block;
+            margin: 2rem auto;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--shadow);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 2rem;
+            box-shadow: 0 8px 30px var(--shadow);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .results-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary);
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .result-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .result-score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 10px;
+        }
+
+        .result-interpretation {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+
+        .result-interpretation strong {
+            color: var(--primary);
+        }
+
+        .chart-container {
+            margin: 2rem 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .tab-content {
+                padding: 1.5rem;
+            }
+            
+            .scale-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .scale-label {
+                min-width: auto;
+            }
+        }
+
+        @media print {
+            .header, .tabs, .btn-primary, .action-buttons {
+                display: none;
+            }
+            
+            .results {
+                display: block !important;
+                box-shadow: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>Perfil de Autoconocimiento</h1>
+        <p>Instrumentos de Evaluación de Habilidades Directivas - Whetten & Cameron (2014)</p>
+    </div>
 
-<div class="header-app text-center">
     <div class="container">
-        <h1>PERFIL DE AUTOCONOCIMIENTO</h1>
-        <p class="lead">Instrumentos de Evaluación de Habilidades Directivas</p>
+        <div class="progress-bar">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0 de 29 preguntas respondidas (0%)</div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab(0)">
+                <div>📊 Estilo Cognoscitivo</div>
+                <small style="display: block; margin-top: 0.3rem; font-weight: 400;">18 preguntas</small>
+            </div>
+            <div class="tab" onclick="switchTab(1)">
+                <div>🎯 Locus de Control</div>
+                <small style="display: block; margin-top: 0.3rem; font-weight: 400;">29 preguntas</small>
+            </div>
+            <div class="tab" onclick="switchTab(2)">
+                <div>🌊 Tolerancia a la Ambigüedad</div>
+                <small style="display: block; margin-top: 0.3rem; font-weight: 400;">16 preguntas</small>
+            </div>
+        </div>
+
+        <form id="assessmentForm">
+            <!-- TAB 1: ESTILO COGNOSCITIVO -->
+            <div class="tab-content active" data-tab="0">
+                <h2 class="section-title">Indicador del Estilo Cognoscitivo</h2>
+                <p class="section-subtitle">Indique qué tan de acuerdo está con cada enunciado. Use la siguiente escala: 1 (Totalmente en desacuerdo) a 5 (Totalmente de acuerdo).</p>
+                <div id="cognitiveQuestions"></div>
+            </div>
+
+            <!-- TAB 2: LOCUS DE CONTROL -->
+            <div class="tab-content" data-tab="1">
+                <h2 class="section-title">Escala de Locus de Control</h2>
+                <p class="section-subtitle">Cada reactivo consiste en un par de opciones (a o b). Seleccione aquella con la que esté más de acuerdo.</p>
+                <div id="locusQuestions"></div>
+            </div>
+
+            <!-- TAB 3: TOLERANCIA A LA AMBIGÜEDAD -->
+            <div class="tab-content" data-tab="2">
+                <h2 class="section-title">Escala de Tolerancia a la Ambigüedad</h2>
+                <p class="section-subtitle">Indique qué tan de acuerdo está con cada enunciado. Use la siguiente escala: 1 (Totalmente en desacuerdo) a 7 (Totalmente de acuerdo).</p>
+                <div id="ambiguityQuestions"></div>
+            </div>
+
+            <button type="button" class="btn-primary" onclick="calculateResults()">
+                Generar Perfil de Autoconocimiento
+            </button>
+        </form>
+
+        <div class="results" id="resultsSection">
+            <h2 class="results-title">Tu Perfil de Autoconocimiento</h2>
+            <div id="resultsContent"></div>
+            <div class="chart-container">
+                <canvas id="resultsChart"></canvas>
+            </div>
+            <div class="action-buttons">
+                <button class="btn-secondary" onclick="window.print()">📄 Imprimir Resultados</button>
+                <button class="btn-secondary" onclick="exportResults()">💾 Descargar Reporte</button>
+                <button class="btn-secondary" onclick="resetAssessment()">🔄 Nueva Evaluación</button>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="container mb-5">
-    <ul class="nav nav-pills nav-justified mb-4" id="pills-tab" role="tablist">
-        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab1">1. Estilo Cognoscitivo</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab2">2. Locus de Control</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab3">3. Tolerancia a la Ambigüedad</button></li>
-    </ul>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // DATOS DE LOS CUESTIONARIOS (Whetten & Cameron, 2014)
+        
+        const cognitiveData = [
+            "Para mí es muy importante la elaboración de un plan claro.",
+            "Me gusta contribuir a soluciones innovadoras para los problemas.",
+            "Siempre me gusta saber qué se debe hacer y cuándo.",
+            "Prefiero intercambiar ideas sobre soluciones creativas.",
+            "Me gusta entender plenamente un problema.",
+            "Me gustan los planes de acción detallados y programados.",
+            "Me siento motivado cuando pienso en soluciones innovadoras.",
+            "Me gusta analizar los problemas.",
+            "Prefiero contar con una estructura clara para realizar mi trabajo.",
+            "Me gusta tener una gran variedad en mi vida laboral.",
+            "Realizo análisis detallados de la información.",
+            "Prefiero las reuniones bien planeadas y con una agenda clara.",
+            "Me atraen más las ideas nuevas que las soluciones ya existentes.",
+            "Estudio cada problema hasta entender la lógica subyacente.",
+            "Tomo decisiones definitivas y hago seguimientos meticulosos.",
+            "Me gusta extender los límites de mi capacidad.",
+            "Una buena tarea es una tarea bien preparada.",
+            "Trato de evitar la rutina en mi vida."
+        ];
 
-    <form id="masterQuiz">
-        <div class="tab-content" id="pills-tabContent">
+        const locusData = [
+            {
+                a: "Los líderes nacen, no se hacen.",
+                b: "Los líderes se hacen, no nacen.",
+                filter: true
+            },
+            {
+                a: "La gente que tiene éxito lo obtiene en gran parte por estar en el lugar adecuado en el momento justo, o porque tiene buena suerte.",
+                b: "El éxito de las personas depende principalmente del trabajo arduo, la dedicación y la capacidad.",
+                ext: "a"
+            },
+            {
+                a: "Cuando algo sale mal en mi vida, es por errores que cometí.",
+                b: "Las calamidades ocurren en mi vida independientemente de las acciones que realice.",
+                ext: "b"
+            },
+            {
+                a: "El hecho de que haya guerras depende de las acciones de los líderes mundiales.",
+                b: "Es inevitable que haya guerras, sin importar los esfuerzos que realicen las personas.",
+                ext: "b"
+            },
+            {
+                a: "Los hijos buenos se hacen con buenos padres.",
+                b: "Algunos niños se vuelven malos sin importar qué tanto se esfuercen los padres.",
+                ext: "b"
+            },
+            {
+                a: "Mi futuro depende en gran parte de las circunstancias que enfrente.",
+                b: "Soy el dueño de mi destino.",
+                ext: "a"
+            },
+            {
+                a: "La historia lo hace, pero simplemente subrayan a personas que estuvieron en el lugar adecuado en el momento oportuno.",
+                b: "Los líderes efectivos son quienes toman acciones decisivas y ejercen influencia donde es importante.",
+                ext: "a"
+            },
+            {
+                a: "Evitar el castigo duro para los criminales conduce a anarquía.",
+                b: "Las personas violentas merecen castigo firme, pero no es apropiado disciplinar físicamente a los niños.",
+                filter: true
+            },
+            {
+                a: "Tengo poca influencia sobre las cosas que me suceden.",
+                b: "El destino y la suerte son cruciales en mi vida.",
+                ext: "a"
+            },
+            {
+                a: "Los clientes nunca estarán totalmente satisfechos con el servicio que reciben de una compañía, independientemente de lo que ésta haga.",
+                b: "Una empresa puede hacer felices a sus clientes cuando les da lo que desean.",
+                ext: "a"
+            },
+            {
+                a: "Cualquier persona puede destacar en la escuela si tiene suficiente motivación.",
+                b: "Algunos niños nunca sobresaldrán en la escuela, sin importar qué tanto se esfuercen los maestros.",
+                ext: "b"
+            },
+            {
+                a: "Los buenos matrimonios dependen de una compatibilidad básica entre los socios.",
+                b: "Los matrimonios que no funcionan se deben principalmente a que una o ambas personas no trabajan lo suficiente para que el matrimonio sea exitoso.",
+                ext: "b"
+            },
+            {
+                a: "Puedo tener un efecto importante en mejorar mis habilidades si asisto con regularidad a clases de capacitación.",
+                b: "Es una pérdida de tiempo, dinero y esfuerzo el tratar de mejorar las habilidades administrativas en un salón de clases.",
+                ext: "b"
+            },
+            {
+                a: "Deberían enseñarse más cursos de administración y liderazgo en las universidades.",
+                b: "Debería haber menos énfasis en impartir habilidades administrativas en las aulas.",
+                filter: true
+            },
+            {
+                a: "Cuando me pasan cosas buenas es porque hice algo bien.",
+                b: "Las cosas malas que me suceden se deben en general a causas fuera de mi control.",
+                ext: "b"
+            },
+            {
+                a: "Muchas veces, cuando tomo exámenes, las preguntas no tienen relación con lo que estudié, de manera que estudiar con ahínco no ayuda en absoluto.",
+                b: "La relación entre qué tanto estudio y qué tan bien salgo en los exámenes es muy directa y obvia. En otras palabras, si me preparo con esmero, obtengo un buen resultado.",
+                ext: "a"
+            },
+            {
+                a: "Me influye lo que dice mi horóscopo.",
+                b: "Yo determino mi propio destino.",
+                ext: "a"
+            },
+            {
+                a: "El gobierno es tan grande e impersonal que no tiene sentido el que las personas comunes y corrientes traten de influir en las decisiones gubernamentales.",
+                b: "Las personas individuales tienen una gran influencia real sobre lo que hace el gobierno.",
+                ext: "a"
+            },
+            {
+                a: "La mayoría de las personas no entiende a qué grado su vida está bajo el control de sucesos accidentales o fortuitos.",
+                b: "En realidad, casi no existe la 'suerte'. Lo que me sucede es resultado de mis propias acciones.",
+                filter: true
+            },
+            {
+                a: "Las personas populares nacieron con el carisma que conduce a su popularidad.",
+                b: "Las personas se vuelven populares porque hacen cosas que otras personas admiran y desean emular.",
+                ext: "a"
+            },
+            {
+                a: "Las cosas que me suceden están más allá de mi control.",
+                b: "Yo, más que nadie más, soy responsable de mis logros.",
+                ext: "a"
+            },
+            {
+                a: "Los directivos hábiles son directivos eficaces, porque las buenas habilidades administrativas conducen al éxito.",
+                b: "El éxito en la administración tiene muy poco que ver con las habilidades que uno tenga. El éxito es más una cuestión de suerte y de estar en el lugar adecuado en el momento oportuno.",
+                ext: "b"
+            },
+            {
+                a: "Los equipos que ganan juegos de pelota son simplemente afortunados.",
+                b: "Los equipos que ganan juegos de pelota han adquirido la habilidad y tienen la preparación adecuada.",
+                ext: "a"
+            },
+            {
+                a: "Creo que la capacitación en las habilidades de trabajo en equipo debe ser un requisito para todos los líderes de grupo.",
+                b: "El esfuerzo individual es la clave para el éxito, y el énfasis en el trabajo en equipo sólo enmascara las contribuciones de los individuos.",
+                filter: true
+            },
+            {
+                a: "Algunos empleados son perezosos y no tienen deseos de trabajar.",
+                b: "Si un directivo hábil trata de hacerlo, entonces puede motivar a casi cualquier persona a trabajar arduamente.",
+                ext: "a"
+            },
+            {
+                a: "La salud económica de las personas mejora o se deteriora debido a las acciones responsables que ellas realizan.",
+                b: "La salud económica está más fuera del control individual de lo que la mayoría de nosotros imagina. Las condiciones económicas dependen de factores nacionales e internacionales que están más allá de nuestro control.",
+                ext: "b"
+            },
+            {
+                a: "Me considero muy persuasivo cuando sé que tengo la razón.",
+                b: "Soy capaz de convencer a las personas de las cosas aun cuando no esté seguro de tener la razón.",
+                filter: true
+            },
+            {
+                a: "Planeo con anticipación mis metas, y hago todo lo posible para alcanzarlas.",
+                b: "Rara vez planeo con anticipación, porque las cosas en general resultan bien de todas formas.",
+                ext: "b"
+            },
+            {
+                a: "La mayoría de las cosas que me suceden en la vida están destinadas a suceder.",
+                b: "Cuando planifico con cuidado, por lo general puedo cambiar los resultados de mi vida mediante el trabajo arduo.",
+                ext: "a"
+            }
+        ];
+
+        const ambiguityData = [
+            "Un experto que no proporciona una respuesta definitiva probablemente no sepa demasiado.",
+            "Me gustaría vivir en el extranjero durante un tiempo.",
+            "No existe tal cosa como un problema que no puede resolverse.",
+            "Las personas que ajustan su vida a un horario probablemente se pierden la mayor parte de la alegría de vivir.",
+            "Un buen trabajo es uno en el que siempre está claro qué debe hacerse y cómo debe hacerse.",
+            "Es más divertido atacar un problema complicado que resolver uno sencillo.",
+            "En el largo plazo es posible lograr más mediante el ataque de problemas pequeños y sencillos que de problemas grandes y complicados.",
+            "Con frecuencia las personas más interesantes son aquellas a quienes no les importa ser diferentes ni originales.",
+            "A largo plazo, lo que es familiar es preferible que lo extraño.",
+            "Las personas que insisten en una respuesta sí o no simplemente no conocen qué tanto es compleja la vida.",
+            "Una persona que lleva una vida uniforme en la que pocos cambios o acontecimientos inesperados ocurren, en realidad tiene mucho de qué estar agradecido.",
+            "Muchas de las decisiones más importantes las tomamos con base en información insuficiente.",
+            "Prefiero las fiestas donde conozco a la mayoría de las personas que las fiestas donde están personas desconocidas.",
+            "Los maestros o supervisores que entregan tareas indefinidas y ambiguas dan una oportunidad para que uno muestre iniciativa y originalidad.",
+            "Cuanto antes todos adquiramos valores e ideales similares, tanto mejor.",
+            "Un buen maestro es uno que hace que usted se pregunte sobre su manera de ver las cosas."
+        ];
+
+        // VARIABLES GLOBALES
+        let currentTab = 0;
+        let answers = {
+            cognitive: {},
+            locus: {},
+            ambiguity: {}
+        };
+
+        // INICIALIZACIÓN
+        window.onload = function() {
+            loadCognitiveQuestions();
+            loadLocusQuestions();
+            loadAmbiguityQuestions();
+            loadSavedAnswers();
+            updateProgress();
+        };
+
+        function loadCognitiveQuestions() {
+            const container = document.getElementById('cognitiveQuestions');
+            cognitiveData.forEach((question, index) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+                div.innerHTML = `
+                    <div class="question-text">
+                        <span class="question-number">${index + 1}</span>
+                        ${question}
+                    </div>
+                    <div class="scale-container">
+                        <span class="scale-label">Totalmente en desacuerdo</span>
+                        <input type="range" 
+                               min="1" 
+                               max="5" 
+                               value="3" 
+                               id="cog_${index}"
+                               oninput="updateRangeValue(this); saveAnswer('cognitive', ${index}, this.value)">
+                        <span class="scale-label">Totalmente de acuerdo</span>
+                        <span class="range-value" id="cog_${index}_value">3</span>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function loadLocusQuestions() {
+            const container = document.getElementById('locusQuestions');
+            locusData.forEach((question, index) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+                div.innerHTML = `
+                    <div class="question-text">
+                        <span class="question-number">${index + 1}</span>
+                        Seleccione la opción con la que esté más de acuerdo:
+                    </div>
+                    <div class="radio-group">
+                        <label class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" 
+                                   name="loc_${index}" 
+                                   value="a"
+                                   onchange="saveAnswer('locus', ${index}, 'a')">
+                            <span><strong>a)</strong> ${question.a}</span>
+                        </label>
+                        <label class="radio-option" onclick="selectRadio(this)">
+                            <input type="radio" 
+                                   name="loc_${index}" 
+                                   value="b"
+                                   onchange="saveAnswer('locus', ${index}, 'b')">
+                            <span><strong>b)</strong> ${question.b}</span>
+                        </label>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function loadAmbiguityQuestions() {
+            const container = document.getElementById('ambiguityQuestions');
+            ambiguityData.forEach((question, index) => {
+                const div = document.createElement('div');
+                div.className = 'question';
+                div.innerHTML = `
+                    <div class="question-text">
+                        <span class="question-number">${index + 1}</span>
+                        ${question}
+                    </div>
+                    <div class="scale-container">
+                        <span class="scale-label">Totalmente en desacuerdo</span>
+                        <input type="range" 
+                               min="1" 
+                               max="7" 
+                               value="4" 
+                               id="amb_${index}"
+                               oninput="updateRangeValue(this); saveAnswer('ambiguity', ${index}, this.value)">
+                        <span class="scale-label">Totalmente de acuerdo</span>
+                        <span class="range-value" id="amb_${index}_value">4</span>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateRangeValue(input) {
+            const valueSpan = document.getElementById(input.id + '_value');
+            valueSpan.textContent = input.value;
+        }
+
+        function selectRadio(label) {
+            const allOptions = label.parentElement.querySelectorAll('.radio-option');
+            allOptions.forEach(opt => opt.classList.remove('selected'));
+            label.classList.add('selected');
+        }
+
+        function switchTab(tabIndex) {
+            currentTab = tabIndex;
             
-            <div class="tab-pane fade show active" id="tab1">
-                <div class="card p-4">
-                    <h3>Indicador del Estilo Cognoscitivo</h3>
-                    <p class="text-muted">Escala: 1 (Totalmente en desacuerdo) a 5 (Totalmente de acuerdo).</p>
-                    <div id="cog-container"></div>
+            // Actualizar tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach((tab, index) => {
+                tab.classList.toggle('active', index === tabIndex);
+            });
+            
+            // Actualizar contenido
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach((content, index) => {
+                content.classList.toggle('active', index === tabIndex);
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function saveAnswer(section, index, value) {
+            answers[section][index] = value;
+            localStorage.setItem('assessmentAnswers', JSON.stringify(answers));
+            updateProgress();
+        }
+
+        function loadSavedAnswers() {
+            const saved = localStorage.getItem('assessmentAnswers');
+            if (saved) {
+                answers = JSON.parse(saved);
+                
+                // Restaurar respuestas de estilo cognoscitivo
+                Object.keys(answers.cognitive || {}).forEach(key => {
+                    const input = document.getElementById(`cog_${key}`);
+                    if (input) {
+                        input.value = answers.cognitive[key];
+                        updateRangeValue(input);
+                    }
+                });
+                
+                // Restaurar respuestas de locus de control
+                Object.keys(answers.locus || {}).forEach(key => {
+                    const radio = document.querySelector(`input[name="loc_${key}"][value="${answers.locus[key]}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                        radio.parentElement.classList.add('selected');
+                    }
+                });
+                
+                // Restaurar respuestas de tolerancia a la ambigüedad
+                Object.keys(answers.ambiguity || {}).forEach(key => {
+                    const input = document.getElementById(`amb_${key}`);
+                    if (input) {
+                        input.value = answers.ambiguity[key];
+                        updateRangeValue(input);
+                    }
+                });
+            }
+        }
+
+        function updateProgress() {
+            const totalQuestions = cognitiveData.length + locusData.length + ambiguityData.length;
+            const answeredQuestions = Object.keys(answers.cognitive).length + 
+                                     Object.keys(answers.locus).length + 
+                                     Object.keys(answers.ambiguity).length;
+            
+            const percentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = 
+                `${answeredQuestions} de ${totalQuestions} preguntas respondidas (${percentage}%)`;
+        }
+
+        function validateAnswers() {
+            const cogComplete = Object.keys(answers.cognitive).length === cognitiveData.length;
+            const locComplete = Object.keys(answers.locus).length === locusData.length;
+            const ambComplete = Object.keys(answers.ambiguity).length === ambiguityData.length;
+            
+            if (!cogComplete || !locComplete || !ambComplete) {
+                let missing = [];
+                if (!cogComplete) missing.push('Estilo Cognoscitivo');
+                if (!locComplete) missing.push('Locus de Control');
+                if (!ambComplete) missing.push('Tolerancia a la Ambigüedad');
+                
+                alert(`Por favor complete todas las secciones antes de generar el perfil.\n\nFaltan: ${missing.join(', ')}`);
+                return false;
+            }
+            
+            return true;
+        }
+
+        function calculateResults() {
+            if (!validateAnswers()) return;
+            
+            // CÁLCULO ESTILO COGNOSCITIVO
+            let knowingScore = 0;
+            let planningScore = 0;
+            
+            // Ítems IMPARES (1,3,5,7,9,11,13,15,17) = CONOCER
+            [0,2,4,6,8,10,12,14,16].forEach(i => {
+                knowingScore += parseInt(answers.cognitive[i]);
+            });
+            
+            // Ítems PARES (2,4,6,8,10,12,14,16,18) = PLANEAR
+            [1,3,5,7,9,11,13,15,17].forEach(i => {
+                planningScore += parseInt(answers.cognitive[i]);
+            });
+            
+            // CÁLCULO LOCUS DE CONTROL
+            let externalScore = 0;
+            locusData.forEach((q, i) => {
+                if (!q.filter && answers.locus[i] === q.ext) {
+                    externalScore++;
+                }
+            });
+            
+            // CÁLCULO TOLERANCIA A LA AMBIGÜEDAD
+            // Ítems a revertir: 1, 3, 5, 7, 9, 11, 13, 15
+            const reverseItems = [0, 2, 4, 6, 8, 10, 12, 14];
+            let ambiguityScore = 0;
+            
+            ambiguityData.forEach((q, i) => {
+                let value = parseInt(answers.ambiguity[i]);
+                if (reverseItems.includes(i)) {
+                    value = 8 - value; // Invertir escala de 7 puntos
+                }
+                ambiguityScore += value;
+            });
+            
+            // INTERPRETACIONES
+            const cogStyle = knowingScore > planningScore ? 
+                { type: 'CONOCER (Analítico)', desc: 'Prefieres entender los problemas a profundidad, analizar información detalladamente y tomar decisiones basadas en lógica y datos. Tiendes a ser sistemático y metódico en tu enfoque.' } :
+                { type: 'CREAR (Innovador)', desc: 'Prefieres generar nuevas ideas, buscar soluciones creativas y explorar posibilidades. Disfrutas la variedad, la innovación y extender los límites de lo convencional.' };
+            
+            const locusType = externalScore <= 11 ?
+                { type: 'INTERNO', desc: 'Crees que tienes control sobre tu vida y que tus resultados dependen principalmente de tus propias acciones, esfuerzo y decisiones. Asumes responsabilidad por tus éxitos y fracasos.' } :
+                { type: 'EXTERNO', desc: 'Tiendes a creer que factores externos (suerte, destino, circunstancias) tienen mayor influencia sobre tus resultados. Esto puede limitar tu sensación de control personal.' };
+            
+            const ambLevel = ambiguityScore >= 44 && ambiguityScore <= 48 ?
+                { type: 'MODERADA', desc: 'Muestras un equilibrio saludable. Puedes tolerar cierta incertidumbre sin sentirte excesivamente incómodo, pero también valoras algo de claridad y estructura.' } :
+                ambiguityScore > 48 ?
+                { type: 'ALTA', desc: 'Tienes alta tolerancia a la ambigüedad. Te sientes cómodo con la incertidumbre, los cambios y las situaciones poco estructuradas. Eres flexible y adaptable.' } :
+                { type: 'BAJA', desc: 'Prefieres la claridad, la estructura y la predictibilidad. La ambigüedad puede causarte incomodidad. Valoras las situaciones bien definidas y los planes claros.' };
+            
+            // MOSTRAR RESULTADOS
+            displayResults({
+                cognitive: { knowing: knowingScore, planning: planningScore, style: cogStyle },
+                locus: { score: externalScore, type: locusType },
+                ambiguity: { score: ambiguityScore, type: ambLevel }
+            });
+        }
+
+        function displayResults(results) {
+            const content = document.getElementById('resultsContent');
+            
+            content.innerHTML = `
+                <div class="result-card">
+                    <div class="result-header">
+                        <span class="result-name">Estilo Cognoscitivo</span>
+                        <span class="result-score">${results.cognitive.style.type}</span>
+                    </div>
+                    <div class="result-interpretation">
+                        <p><strong>Puntajes:</strong></p>
+                        <p>• Conocer (analizar/pensar): ${results.cognitive.knowing} puntos</p>
+                        <p>• Crear (innovar/experimentar): ${results.cognitive.planning} puntos</p>
+                        <p style="margin-top: 1rem;"><strong>Interpretación:</strong><br>${results.cognitive.style.desc}</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="tab-pane fade" id="tab2">
-                <div class="card p-4">
-                    <h3>Escala de Locus de Control</h3>
-                    <p class="text-muted">Seleccione la opción (a o b) con la que esté más de acuerdo.</p>
-                    <div id="locus-container"></div>
+                <div class="result-card">
+                    <div class="result-header">
+                        <span class="result-name">Locus de Control</span>
+                        <span class="result-score">${results.locus.type.type}</span>
+                    </div>
+                    <div class="result-interpretation">
+                        <p><strong>Puntaje:</strong> ${results.locus.score} de 24 (${results.locus.score <= 11 ? 'Interno' : 'Externo'})</p>
+                        <p style="margin-top: 1rem;"><strong>Interpretación:</strong><br>${results.locus.type.desc}</p>
+                        <p style="margin-top: 1rem;"><em>Nota: Puntajes de 0-11 indican locus interno. Puntajes de 12-24 indican locus externo.</em></p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="tab-pane fade" id="tab3">
-                <div class="card p-4">
-                    <h3>Escala de Tolerancia a la Ambigüedad</h3>
-                    <p class="text-muted">Escala: 1 (Totalmente en desacuerdo) a 7 (Totalmente de acuerdo).</p>
-                    <div id="amb-container"></div>
+                <div class="result-card">
+                    <div class="result-header">
+                        <span class="result-name">Tolerancia a la Ambigüedad</span>
+                        <span class="result-score">${results.ambiguity.type.type}</span>
+                    </div>
+                    <div class="result-interpretation">
+                        <p><strong>Puntaje:</strong> ${results.ambiguity.score} de 112</p>
+                        <p style="margin-top: 1rem;"><strong>Interpretación:</strong><br>${results.ambiguity.type.desc}</p>
+                        <p style="margin-top: 1rem;"><em>Nota: Puntajes de 44-48 = Moderada. Más de 48 = Alta. Menos de 44 = Baja.</em></p>
+                    </div>
                 </div>
-            </div>
-        </div>
+            `;
+            
+            // Crear gráfico
+            createChart(results);
+            
+            // Mostrar sección de resultados
+            document.getElementById('resultsSection').classList.add('show');
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            
+            // Guardar resultados
+            localStorage.setItem('assessmentResults', JSON.stringify(results));
+        }
 
-        <div class="text-center mt-4">
-            <button type="button" class="btn btn-primary btn-lg" onclick="procesarPerfil()">Generar Perfil Individual</button>
-        </div>
-    </form>
+        function createChart(results) {
+            const ctx = document.getElementById('resultsChart').getContext('2d');
+            
+            // Destruir gráfico anterior si existe
+            if (window.myChart) {
+                window.myChart.destroy();
+            }
+            
+            window.myChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Conocer', 'Crear', 'Locus Interno', 'Tolerancia Ambigüedad'],
+                    datasets: [{
+                        label: 'Tu Perfil',
+                        data: [
+                            (results.cognitive.knowing / 45) * 100,
+                            (results.cognitive.planning / 45) * 100,
+                            ((24 - results.locus.score) / 24) * 100,
+                            (results.ambiguity.score / 112) * 100
+                        ],
+                        backgroundColor: 'rgba(26, 77, 46, 0.2)',
+                        borderColor: 'rgba(26, 77, 46, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(26, 77, 46, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(26, 77, 46, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Visualización de Tu Perfil de Autoconocimiento',
+                            font: {
+                                size: 18,
+                                family: "'Playfair Display', serif"
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
-    <div id="results-area" class="card result-box mt-5">
-        <h2 class="text-center text-primary mb-4">Análisis de Perfil</h2>
-        <div id="results-content"></div>
-        <div class="text-center mt-4">
-            <button class="btn btn-outline-secondary" onclick="window.print()">Imprimir Reporte</button>
-        </div>
-    </div>
-</div>
+        function exportResults() {
+            const results = localStorage.getItem('assessmentResults');
+            if (!results) {
+                alert('No hay resultados para exportar.');
+                return;
+            }
+            
+            const data = JSON.parse(results);
+            const text = `PERFIL DE AUTOCONOCIMIENTO
+Whetten & Cameron (2014)
 
-<script>
-    // Datos de Whetten y Cameron (2014)
-    const cogData = [
-        "Para mí es muy importante la elaboración de un plan claro.",
-        "Me gusta contribuir a soluciones innovadoras.",
-        "Siempre me gusta saber qué se debe hacer y cuándo.",
-        "Prefiero buscar soluciones creativas.",
-        "Me gusta entender plenamente un problema.",
-        "Me gustan los planes de acción detallados.",
-        "Me siento motivado por la innovación continua.",
-        "Me gusta analizar los problemas.",
-        "Prefiero contar con una estructura clara para hacer mi trabajo.",
-        "Me gusta tener una gran variedad en mi vida.",
-        "Realizo análisis detallados.",
-        "Prefiero las reuniones bien planeadas y con una agenda clara.",
-        "Me atraen más las ideas nuevas que las soluciones ya existentes.",
-        "Estudio cada problema hasta entender la lógica subyacente.",
-        "Tomo decisiones definitivas y hago seguimientos meticulosos.",
-        "Me gusta extender los límites.",
-        "Una buena tarea es una tarea bien preparada.",
-        "Trato de evitar la rutina."
-    ];
+=================================
+ESTILO COGNOSCITIVO
+=================================
+Tipo: ${data.cognitive.style.type}
+Conocer: ${data.cognitive.knowing} puntos
+Crear: ${data.cognitive.planning} puntos
+${data.cognitive.style.desc}
 
-    const locusData = [
-        {id:1, a:"Los líderes nacen, no se hacen.", b:"Los líderes se hacen, no nacen.", f:true},
-        {id:2, a:"La gente tiene éxito por suerte/lugar adecuado.", b:"El éxito depende del trabajo arduo.", ext:"a"},
-        {id:3, a:"Si algo va mal, es porque cometí errores.", b:"Las calamidades ocurren sin importar qué haga.", ext:"b"},
-        {id:4, a:"La guerra depende de los líderes.", b:"Es inevitable que haya guerras.", ext:"b"},
-        {id:5, a:"Hijos buenos son por buenos padres.", b:"Hijos se vuelven malos sin importar los padres.", ext:"b"},
-        {id:6, a:"Mi éxito depende de circunstancias externas.", b:"Soy el dueño de mi destino.", ext:"a"},
-        {id:7, a:"La historia hace visibles a los líderes por suerte.", b:"Líderes eficaces toman acciones clave.", ext:"a"},
-        {id:8, a:"Evitar castigo crea irresponsabilidad.", b:"No es apropiado disciplinar físicamente.", f:true},
-        {id:9, a:"Tengo poca influencia en mi vida.", b:"El destino no es crucial en mi vida.", ext:"a"},
-        {id:10, a:"Clientes nunca estarán satisfechos.", b:"Se puede satisfacer al cliente dándole lo deseado.", ext:"a"},
-        {id:11, a:"Cualquiera tiene éxito en escuela con esfuerzo.", b:"Algunos nunca destacarán.", ext:"b"},
-        {id:12, a:"Buenos matrimonios requieren trabajo.", b:"Fracasan por ser incompatibles.", ext:"b"},
-        {id:13, a:"Puedo mejorar habilidades con aprendizaje.", b:"Es pérdida de tiempo tratar de mejorar en clase.", ext:"b"},
-        {id:14, a:"Deberían enseñarse más cursos de liderazgo.", b:"Debe haber menos énfasis en ellos.", f:true},
-        {id:15, a:"Cosas buenas pasaron porque hice algo bueno.", b:"Cosas malas son por causas fuera de control.", ext:"b"},
-        {id:16, a:"Exámenes no tenían conexión con lo estudiado.", b:"Si me preparaba, obtenía buen resultado.", ext:"a"},
-        {id:17, a:"Me influye el horóscopo.", b:"Determino mi propio destino.", ext:"a"},
-        {id:18, a:"El gobierno es muy grande para influir.", b:"Individuos tienen influencia real.", ext:"a"},
-        {id:19, a:"Personas buscan responsabilidad.", b:"Personas tratan de trabajar lo menos posible.", f:true},
-        {id:20, a:"Populares tienen carisma inherente.", b:"Se vuelven populares por comportamiento.", ext:"a"},
-        {id:21, a:"Suceden cosas sobre las que tengo poco control.", b:"Soy responsable de mis resultados.", ext:"a"},
-        {id:22, a:"Directivos hábiles tendrán más éxito.", b:"Éxito tiene poco que ver con competencia.", ext:"b"},
-        {id:23, a:"Equipos ganan por suerte.", b:"Ganan por habilidad y preparación.", ext:"a"},
-        {id:24, a:"Trabajo en equipo es requisito.", b:"Esfuerzo individual es la clave.", f:true},
-        {id:25, a:"Algunos empleados son perezosos.", b:"Directivo hábil puede motivar a casi todos.", ext:"a"},
-        {id:26, a:"Personas mejoran economía con responsabilidad.", b:"Salud económica está fuera de control individual.", ext:"b"},
-        {id:27, a:"Soy persuasivo si tengo razón.", b:"Convenzo aunque no esté seguro.", f:true},
-        {id:28, a:"Planeo con anticipación metas.", b:"Rara vez planeo porque sale bien igual.", ext:"b"},
-        {id:29, a:"Cosas están destinadas a suceder.", b:"Cambiamos la vida con trabajo duro.", ext:"a"}
-    ];
+=================================
+LOCUS DE CONTROL
+=================================
+Tipo: ${data.locus.type.type}
+Puntaje: ${data.locus.score} de 24
+${data.locus.type.desc}
 
-    const ambData = [
-        "Un experto sin respuesta definitiva probablemente no sepa demasiado.",
-        "Me gustaría vivir en el extranjero durante un tiempo.",
-        "No existe tal cosa como un problema sin solución.",
-        "Quien ajusta su vida a un horario pierde alegría.",
-        "Un buen trabajo es donde siempre está claro qué hacer.",
-        "Es más divertido atacar un problema complicado.",
-        "Se logra más resolviendo problemas sencillos que grandes.",
-        "Personas interesantes no les importa ser originales.",
-        "Siempre es preferible lo familiar que lo extraño.",
-        "Quienes insisten en sí o no desconocen la complejidad.",
-        "Vida estable sin sorpresas es de agradecer.",
-        "Decisiones importantes se basan en información insuficiente.",
-        "Prefiero fiestas con conocidos que con extraños.",
-        "Tareas ambiguas dan oportunidad de iniciativa.",
-        "Cuanto antes tengamos valores similares, mejor.",
-        "Un buen maestro hace pensar al alumno."
-    ];
+=================================
+TOLERANCIA A LA AMBIGÜEDAD
+=================================
+Tipo: ${data.ambiguity.type.type}
+Puntaje: ${data.ambiguity.score} de 112
+${data.ambiguity.type.desc}
 
-    // Cargar Preguntas
-    window.onload = function() {
-        const c1 = document.getElementById('cog-container');
-        cogData.forEach((p, i) => {
-            c1.innerHTML += `<div class="question-row"><label class="form-label">${i+1}. ${p}</label><input type="range" class="form-range" min="1" max="5" id="cog_${i}"></div>`;
-        });
-        const c2 = document.getElementById('locus-container');
-        locusData.forEach(p => {
-            c2.innerHTML += `<div class="question-row"><p><b>${p.id}.</b> Seleccione:</p>
-                <input type="radio" name="loc_${p.id}" value="a"> a) ${p.a}<br>
-                <input type="radio" name="loc_${p.id}" value="b"> b) ${p.b}</div>`;
-        });
-        const c3 = document.getElementById('amb-container');
-        ambData.forEach((p, i) => {
-            c3.innerHTML += `<div class="question-row"><label class="form-label">${i+1}. ${p}</label><input type="range" class="form-range" min="1" max="7" id="amb_${i}"></div>`;
-        });
-    }
+Fecha: ${new Date().toLocaleDateString('es-ES')}
+`;
+            
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'perfil_autoconocimiento.txt';
+            a.click();
+        }
 
-    function procesarPerfil() {
-        let locScore = 0;
-        locusData.forEach(q => {
-            const sel = document.querySelector(`input[name="loc_${q.id}"]:checked`);
-            if(sel && !q.f && sel.value === q.ext) locScore++;
-        });
-
-        document.getElementById('results-area').style.display = 'block';
-        document.getElementById('results-content').innerHTML = `
-            <div class="alert alert-info">
-                <h4>Puntaje Locus de Control: ${locScore}</h4>
-                <p>${locScore <= 11 ? "<b>Interpretación: Locus de Control Interno.</b> Crees que tus resultados dependen de tus propias acciones." : "<b>Interpretación: Locus de Control Externo.</b> Crees que factores externos influyen en tus resultados."}</p>
-            </div>
-            <p class="mt-4"><i>Complete el análisis detallado en su archivo REFLEXION.md basado en estos resultados.</i></p>
-        `;
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        function resetAssessment() {
+            if (confirm('¿Está seguro de que desea reiniciar la evaluación? Se perderán todas las respuestas.')) {
+                localStorage.removeItem('assessmentAnswers');
+                localStorage.removeItem('assessmentResults');
+                location.reload();
+            }
+        }
+    </script>
 </body>
 </html>
