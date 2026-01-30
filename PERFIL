@@ -1,53 +1,114 @@
-{
-  "project_name": "App de Autoconocimiento Whetten",
-  "version": "1.0",
-  "test_sections": [
-    {
-      "id": "cognitive_style",
-      "title": "Indicador del Estilo Cognoscitivo",
-      "instruction": "Responda utilizando una escala del 1 (Totalmente en desacuerdo) al 5 (Totalmente de acuerdo)",
-      "questions": [
-        {"id": 1, "text": "Para mí es muy importante la elaboración de un plan claro."},
-        {"id": 2, "text": "Me gusta contribuir a soluciones innovadoras."},
-        {"id": 3, "text": "Siempre me gusta saber qué se debe hacer y cuándo."},
-        {"id": 4, "text": "Prefiero buscar soluciones creativas."},
-        {"id": 5, "text": "Me gusta entender plenamente un problema."},
-        {"id": 6, "text": "Me gustan los planes de acción detallados."},
-        {"id": 7, "text": "Me siento motivado por la innovación continua."},
-        {"id": 8, "text": "Me gusta analizar los problemas."},
-        {"id": 9, "text": "Prefiero contar con una estructura clara para hacer mi trabajo."},
-        {"id": 10, "text": "Me gusta tener una gran variedad en mi vida."},
-        {"id": 11, "text": "Realizo análisis detallados."},
-        {"id": 12, "text": "Prefiero las reuniones bien planeadas y con una agenda clara."},
-        {"id": 13, "text": "Me atraen más las ideas nuevas que las soluciones ya existentes."},
-        {"id": 14, "text": "Estudio cada problema hasta entender la lógica subyacente."},
-        {"id": 15, "text": "Tomo decisiones definitivas y hago seguimientos meticulosos."},
-        {"id": 16, "text": "Me gusta extender los límites."},
-        {"id": 17, "text": "Una buena tarea es una tarea bien preparada."},
-        {"id": 18, "text": "Trato de evitar la rutina."}
-      ]
-    },
-    {
-      "id": "locus_control",
-      "title": "Escala de Locus de Control",
-      "instruction": "Seleccione la opción (a o b) con la que más se identifique.",
-      "questions": [
-        {"id": 1, "options": {"a": "Los líderes nacen, no se hacen.", "b": "Los líderes se hacen, no nacen."}},
-        {"id": 2, "options": {"a": "La gente a menudo tiene éxito porque está en el lugar correcto...", "b": "El éxito depende en su mayoría del trabajo arduo y la capacidad."}},
-        {"id": 6, "options": {"a": "Mi éxito futuro depende principalmente de circunstancias ajenas.", "b": "Soy el dueño de mi destino."}},
-        {"id": 21, "options": {"a": "En mi vida parecen suceder cosas sobre las que tengo poco control.", "b": "Me siento responsable por los resultados que obtengo."}}
-      ]
-    },
-    {
-      "id": "ambiguity_tolerance",
-      "title": "Escala de Tolerancia a la Ambigüedad",
-      "instruction": "Responda en escala del 1 (Totalmente en desacuerdo) al 7 (Totalmente de acuerdo)",
-      "questions": [
-        {"id": 1, "text": "Un experto al que no se le ocurre una respuesta definitiva probablemente no sepa demasiado."},
-        {"id": 6, "text": "Es más divertido atacar un problema complicado que resolver uno sencillo."},
-        {"id": 9, "text": "Siempre es preferible algo familiar que algo extraño."},
-        {"id": 14, "text": "Los supervisores que asignan tareas ambiguas dan la oportunidad de mostrar iniciativa."}
-      ]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Autoconocimiento - Gestión de las Relaciones</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .card { border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .header-section { background: #003366; color: white; padding: 2rem 0; border-bottom: 5px solid #00a8e8; }
+        .btn-primary { background-color: #003366; border: none; }
+        .btn-primary:hover { background-color: #001f40; }
+        .question-text { font-weight: 500; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="header-section text-center">
+    <h1>Evaluación de Perfil Directivo</h1>
+    <p>Basado en Whetten y Cameron (2014)</p>
+</div>
+
+<div class="container mt-5">
+    <div id="quiz-container">
+        <div class="card p-4">
+            <h3>1. Indicador del Estilo Cognoscitivo</h3>
+            [cite_start]<p class="text-muted">Valora cómo reúne información, la evalúa y toma decisiones[cite: 2].</p>
+            <hr>
+            <form id="cognitive-form">
+                <div class="mb-3">
+                    <p class="question-text">1. [cite_start]Para mí es muy importante la elaboración de un plan claro[cite: 11].</p>
+                    <input type="range" class="form-range" min="1" max="5" step="1" id="q1" name="q1">
+                    <div class="d-flex justify-content-between small"><span>Desacuerdo</span><span>Acuerdo</span></div>
+                </div>
+                <div class="mb-3">
+                    <p class="question-text">2. [cite_start]Me gusta contribuir a soluciones innovadoras[cite: 11].</p>
+                    <input type="range" class="form-range" min="1" max="5" id="q2">
+                </div>
+                <div class="mb-3">
+                    <p class="question-text">4. [cite_start]Prefiero buscar soluciones creativas[cite: 11].</p>
+                    <input type="range" class="form-range" min="1" max="5" id="q4">
+                </div>
+            </form>
+        </div>
+
+        <div class="card p-4">
+            <h3>2. Escala de Locus de Control</h3>
+            [cite_start]<p class="text-muted">Seleccione la opción con la que más se identifique[cite: 15].</p>
+            <hr>
+            <form id="locus-form">
+                <div class="mb-4">
+                    <p class="question-text">Pregunta 1:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="locus1" value="a" id="l1a">
+                        <label class="form-check-label" for="l1a">a. [cite_start]Los líderes nacen, no se hacen[cite: 18].</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="locus1" value="b" id="l1b">
+                        <label class="form-check-label" for="l1b">b. [cite_start]Los líderes se hacen, no nacen[cite: 19].</label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p class="question-text">Pregunta 6:</p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="locus6" value="a" id="l6a">
+                        <label class="form-check-label" for="l6a">a. [cite_start]Mi éxito futuro depende principalmente de circunstancias externas[cite: 28].</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="locus6" value="b" id="l6b">
+                        <label class="form-check-label" for="l6b">b. [cite_start]Soy el dueño de mi destino[cite: 29].</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="text-center mb-5">
+            <button class="btn btn-primary btn-lg" onclick="calcularResultados()">Generar Perfil Individual</button>
+        </div>
+    </div>
+
+    <div id="results-area" class="card p-4 d-none">
+        <h2 class="text-center text-primary">Tu Perfil de Gestión</h2>
+        <div id="analysis-content" class="mt-3"></div>
+        <button class="btn btn-outline-secondary mt-3" onclick="window.print()">Imprimir Reporte</button>
+    </div>
+</div>
+
+<script>
+    function calcularResultados() {
+        const q1 = parseInt(document.getElementById('q1').value);
+        const l6 = document.querySelector('input[name="locus6"]:checked')?.value;
+        
+        const resultsArea = document.getElementById('results-area');
+        const content = document.getElementById('analysis-content');
+        
+        resultsArea.classList.remove('d-none');
+        
+        let perfilLocus = l6 === 'b' ? "Locus de Control Interno (Proactivo)" : "Locus de Control Externo (Reactivo)";
+        
+        content.innerHTML = `
+            <p><strong>Tendencia de Planificación:</strong> Tu nivel de acuerdo con planes claros es de ${q1}/5.</p>
+            <p><strong>Orientación de Control:</strong> Posees un <strong>${perfilLocus}</strong>.</p>
+            <div class="alert alert-info">
+                <strong>Reflexión Sugerida:</strong> ¿Cómo influye tu percepción de control en la gestión de tus relaciones académicas y profesionales?
+            </div>
+        `;
+        
+        window.scrollTo(0, document.body.scrollHeight);
     }
-  ]
-}
+</script>
+
+</body>
+</html>
