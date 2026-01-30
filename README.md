@@ -10,7 +10,7 @@ Responde con honestidad: No hay respuestas correctas; la precisión del perfil d
 
 Captura tus resultados: Al finalizar, la app te entregará un puntaje y una interpretación de tu Locus de Control.
 
-Actividad de eflexión
+Actividad de reflexión
 
 Una vez obtenido tu resultado, reflexiona en tus resultados
 
