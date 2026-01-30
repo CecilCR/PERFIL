@@ -1,0 +1,53 @@
+{
+  "project_name": "App de Autoconocimiento Whetten",
+  "version": "1.0",
+  "test_sections": [
+    {
+      "id": "cognitive_style",
+      "title": "Indicador del Estilo Cognoscitivo",
+      "instruction": "Responda utilizando una escala del 1 (Totalmente en desacuerdo) al 5 (Totalmente de acuerdo)",
+      "questions": [
+        {"id": 1, "text": "Para mí es muy importante la elaboración de un plan claro."},
+        {"id": 2, "text": "Me gusta contribuir a soluciones innovadoras."},
+        {"id": 3, "text": "Siempre me gusta saber qué se debe hacer y cuándo."},
+        {"id": 4, "text": "Prefiero buscar soluciones creativas."},
+        {"id": 5, "text": "Me gusta entender plenamente un problema."},
+        {"id": 6, "text": "Me gustan los planes de acción detallados."},
+        {"id": 7, "text": "Me siento motivado por la innovación continua."},
+        {"id": 8, "text": "Me gusta analizar los problemas."},
+        {"id": 9, "text": "Prefiero contar con una estructura clara para hacer mi trabajo."},
+        {"id": 10, "text": "Me gusta tener una gran variedad en mi vida."},
+        {"id": 11, "text": "Realizo análisis detallados."},
+        {"id": 12, "text": "Prefiero las reuniones bien planeadas y con una agenda clara."},
+        {"id": 13, "text": "Me atraen más las ideas nuevas que las soluciones ya existentes."},
+        {"id": 14, "text": "Estudio cada problema hasta entender la lógica subyacente."},
+        {"id": 15, "text": "Tomo decisiones definitivas y hago seguimientos meticulosos."},
+        {"id": 16, "text": "Me gusta extender los límites."},
+        {"id": 17, "text": "Una buena tarea es una tarea bien preparada."},
+        {"id": 18, "text": "Trato de evitar la rutina."}
+      ]
+    },
+    {
+      "id": "locus_control",
+      "title": "Escala de Locus de Control",
+      "instruction": "Seleccione la opción (a o b) con la que más se identifique.",
+      "questions": [
+        {"id": 1, "options": {"a": "Los líderes nacen, no se hacen.", "b": "Los líderes se hacen, no nacen."}},
+        {"id": 2, "options": {"a": "La gente a menudo tiene éxito porque está en el lugar correcto...", "b": "El éxito depende en su mayoría del trabajo arduo y la capacidad."}},
+        {"id": 6, "options": {"a": "Mi éxito futuro depende principalmente de circunstancias ajenas.", "b": "Soy el dueño de mi destino."}},
+        {"id": 21, "options": {"a": "En mi vida parecen suceder cosas sobre las que tengo poco control.", "b": "Me siento responsable por los resultados que obtengo."}}
+      ]
+    },
+    {
+      "id": "ambiguity_tolerance",
+      "title": "Escala de Tolerancia a la Ambigüedad",
+      "instruction": "Responda en escala del 1 (Totalmente en desacuerdo) al 7 (Totalmente de acuerdo)",
+      "questions": [
+        {"id": 1, "text": "Un experto al que no se le ocurre una respuesta definitiva probablemente no sepa demasiado."},
+        {"id": 6, "text": "Es más divertido atacar un problema complicado que resolver uno sencillo."},
+        {"id": 9, "text": "Siempre es preferible algo familiar que algo extraño."},
+        {"id": 14, "text": "Los supervisores que asignan tareas ambiguas dan la oportunidad de mostrar iniciativa."}
+      ]
+    }
+  ]
+}
