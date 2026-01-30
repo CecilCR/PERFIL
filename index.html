@@ -221,6 +221,11 @@
             -webkit-appearance: none;
         }
 
+        input[type="range"].no-value {
+            background: linear-gradient(to right, #f5f5f5 0%, #f5f5f5 100%);
+            border: 2px dashed #ccc;
+        }
+
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -231,6 +236,11 @@
             cursor: pointer;
             box-shadow: 0 2px 8px var(--shadow);
             transition: all 0.2s ease;
+        }
+
+        input[type="range"].no-value::-webkit-slider-thumb {
+            background: #ccc;
+            opacity: 0.5;
         }
 
         input[type="range"]::-webkit-slider-thumb:hover {
@@ -254,6 +264,11 @@
             font-weight: 600;
             color: var(--primary);
             font-size: 1.1rem;
+        }
+
+        input[type="range"].no-value + .scale-label + .range-value {
+            color: #ccc;
+            font-weight: 400;
         }
 
         .radio-group {
@@ -760,12 +775,12 @@
                         <input type="range" 
                                min="1" 
                                max="5" 
-                               value="3" 
                                id="cog_${index}"
+                               class="no-value"
                                oninput="updateRangeValue(this); saveAnswer('cognitive', ${index}, this.value)"
                                onchange="saveAnswer('cognitive', ${index}, this.value)">
                         <span class="scale-label">Totalmente de acuerdo</span>
-                        <span class="range-value" id="cog_${index}_value">3</span>
+                        <span class="range-value" id="cog_${index}_value">-</span>
                     </div>
                 `;
                 container.appendChild(div);
@@ -818,12 +833,12 @@
                         <input type="range" 
                                min="1" 
                                max="7" 
-                               value="4" 
                                id="amb_${index}"
+                               class="no-value"
                                oninput="updateRangeValue(this); saveAnswer('ambiguity', ${index}, this.value)"
                                onchange="saveAnswer('ambiguity', ${index}, this.value)">
                         <span class="scale-label">Totalmente de acuerdo</span>
-                        <span class="range-value" id="amb_${index}_value">4</span>
+                        <span class="range-value" id="amb_${index}_value">-</span>
                     </div>
                 `;
                 container.appendChild(div);
@@ -863,6 +878,13 @@
         function saveAnswer(section, index, value) {
             answers[section][index] = value;
             localStorage.setItem('assessmentAnswers', JSON.stringify(answers));
+            
+            // Remover clase no-value del input
+            const input = document.getElementById(`${section === 'cognitive' ? 'cog' : section === 'ambiguity' ? 'amb' : 'loc'}_${index}`);
+            if (input && input.classList) {
+                input.classList.remove('no-value');
+            }
+            
             updateProgress();
         }
 
@@ -876,6 +898,7 @@
                     const input = document.getElementById(`cog_${key}`);
                     if (input) {
                         input.value = answers.cognitive[key];
+                        input.classList.remove('no-value');
                         updateRangeValue(input);
                     }
                 });
@@ -894,16 +917,9 @@
                     const input = document.getElementById(`amb_${key}`);
                     if (input) {
                         input.value = answers.ambiguity[key];
+                        input.classList.remove('no-value');
                         updateRangeValue(input);
                     }
-                });
-            } else {
-                // Inicializar valores por defecto si no hay guardados
-                cognitiveData.forEach((_, index) => {
-                    answers.cognitive[index] = '3';
-                });
-                ambiguityData.forEach((_, index) => {
-                    answers.ambiguity[index] = '4';
                 });
             }
             updateProgress();
