@@ -4,34 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Autoconocimiento - Whetten & Cameron</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* (Se mantiene el estilo visual profesional del diseño anterior) */
         :root { --primary: #1a4d2e; --accent: #ffd700; --bg: #faf8f3; --text: #2b2b2b; }
-        body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--text); }
-        .header { background: var(--primary); color: white; padding: 3rem; text-align: center; }
-        .container { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-        .tab { flex: 1; padding: 15px; background: white; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 600; }
+        body { font-family: 'Work Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; }
+        .header { background: var(--primary); color: white; padding: 2.5rem; text-align: center; border-bottom: 5px solid var(--accent); }
+        .container { max-width: 850px; margin: 2rem auto; padding: 0 1.5rem; }
+        .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+        .tab { flex: 1; padding: 12px; background: white; border: 2px solid #d4c5b0; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 600; transition: 0.3s; }
         .tab.active { background: var(--primary); color: white; border-color: var(--primary); }
-        .tab-content { display: none; background: white; padding: 2rem; border-radius: 15px; shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .tab-content { display: none; background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .tab-content.active { display: block; }
-        .question { border-bottom: 1px solid #eee; padding: 15px 0; }
-        .btn-primary { background: var(--primary); color: white; border: none; padding: 1rem 2rem; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.2rem; }
-        .results { display: none; margin-top: 2rem; }
+        .question { border-bottom: 1px solid #eee; padding: 20px 0; }
+        .label-container { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-top: 5px; font-weight: 600; }
+        .btn-primary { background: var(--primary); color: white; border: none; padding: 1.2rem; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.1rem; font-weight: bold; margin-top: 20px; }
+        .results-card { display: none; margin-top: 2rem; background: white; padding: 2rem; border-radius: 15px; border-left: 6px solid var(--primary); }
+        .interpretation-box { background: #f0f4f1; padding: 15px; border-radius: 8px; margin-top: 10px; font-size: 0.95rem; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Perfil de Autoconocimiento</h1>
-        <p>Cálculos basados en Claves de Resultados - Whetten & Cameron (2014)</p>
+        <p>Gestión de las Relaciones | Whetten & Cameron (2014)</p>
     </div>
 
     <div class="container">
         <div class="tabs">
-            <div class="tab active" onclick="switchTab(0)">Estilo Cognoscitivo</div>
-            <div class="tab" onclick="switchTab(1)">Locus de Control</div>
-            <div class="tab" onclick="switchTab(2)">Ambigüedad</div>
+            <div class="tab active" onclick="switchTab(0)">1. Estilo Cognoscitivo</div>
+            <div class="tab" onclick="switchTab(1)">2. Locus de Control</div>
+            <div class="tab" onclick="switchTab(2)">3. Ambigüedad</div>
         </div>
 
         <form id="assessmentForm">
@@ -40,22 +41,24 @@
                 <div id="cogContainer"></div>
             </div>
             <div class="tab-content" id="tab1">
-                <h2>Locus de Control</h2>
+                <h2>Escala de Locus de Control</h2>
                 <div id="locContainer"></div>
             </div>
             <div class="tab-content" id="tab2">
                 <h2>Tolerancia a la Ambigüedad</h2>
                 <div id="ambContainer"></div>
             </div>
-            <button type="button" class="btn-primary" onclick="calculate()">Generar Resultados Precisos</button>
+            <button type="button" class="btn-primary" onclick="calculate()">Obtener Perfil y Explicación</button>
         </form>
 
-        <div id="results" class="results">
+        <div id="results" class="results-card">
+            <h2 style="color: var(--primary); text-align: center;">Tu Perfil Diagnóstico</h2>
             <div id="resultsContent"></div>
         </div>
     </div>
 
 <script>
+    // Datos y Claves de Puntuación [cite: 108, 111, 113, 116, 127]
     const cogQs = [
         "Para mí es muy importante la elaboración de un plan claro.", "Me gusta contribuir a soluciones innovadoras.",
         "Siempre me gusta saber qué se debe hacer y cuándo.", "Prefiero buscar soluciones creativas.",
@@ -69,7 +72,7 @@
     ];
 
     const locQs = [
-        {a: "Líderes nacen.", b: "Líderes se hacen."}, {a: "Éxito es suerte.", b: "Éxito es trabajo duro."},
+        {a: "Los líderes nacen.", b: "Los líderes se hacen."}, {a: "El éxito es suerte.", b: "El éxito es trabajo duro."},
         {a: "Errores personales.", b: "Calamidades inevitables."}, {a: "Líderes causan guerras.", b: "Guerras inevitables."},
         {a: "Buenos padres.", b: "Niños malos inevitablemente."}, {a: "Futuro depende de circunstancias.", b: "Dueño de mi destino."},
         {a: "Historia y suerte.", b: "Acciones decisivas."}, {a: "Evitar castigo es malo.", b: "No disciplina física."},
@@ -87,7 +90,7 @@
     ];
 
     const ambQs = [
-        "Experto sin respuesta definitiva.", "Vivir en el extranjero.", "No hay problema sin solución.",
+        "Un experto sin respuesta definitiva.", "Vivir en el extranjero.", "No hay problema sin solución.",
         "Horarios pierden alegría.", "Buen trabajo es claro.", "Problema complicado es divertido.",
         "Problemas sencillos rinden más.", "Personas originales.", "Familiar es preferible.",
         "Respuesta sí o no.", "Vida estable.", "Información insuficiente.", "Fiestas con conocidos.",
@@ -96,62 +99,81 @@
 
     function init() {
         const c1 = document.getElementById('cogContainer');
-        cogQs.forEach((q, i) => c1.innerHTML += `<div class="question"><p>${i+1}. ${q}</p><input type="range" min="1" max="5" id="cog_${i+1}"></div>`);
+        cogQs.forEach((q, i) => c1.innerHTML += `
+            <div class="question">
+                <p><strong>${i+1}.</strong> ${q}</p>
+                <input type="range" min="1" max="5" id="cog_${i+1}" style="width:100%">
+                <div class="label-container">
+                    <span>1: Totalmente en desacuerdo</span>
+                    <span>5: Totalmente de acuerdo</span>
+                </div>
+            </div>`);
         
         const c2 = document.getElementById('locContainer');
-        locQs.forEach((q, i) => c2.innerHTML += `<div class="question"><p>${i+1}.</p><input type="radio" name="loc_${i+1}" value="a"> a) ${q.a}<br><input type="radio" name="loc_${i+1}" value="b"> b) ${q.b}</div>`);
+        locQs.forEach((q, i) => c2.innerHTML += `<div class="question"><p><strong>${i+1}.</strong></p><input type="radio" name="loc_${i+1}" value="a"> a) ${q.a}<br><input type="radio" name="loc_${i+1}" value="b"> b) ${q.b}</div>`);
 
         const c3 = document.getElementById('ambContainer');
-        ambQs.forEach((q, i) => c3.innerHTML += `<div class="question"><p>${i+1}. ${q}</p><input type="range" min="1" max="7" id="amb_${i+1}"></div>`);
+        ambQs.forEach((q, i) => c3.innerHTML += `
+            <div class="question">
+                <p><strong>${i+1}.</strong> ${q}</p>
+                <input type="range" min="1" max="7" id="amb_${i+1}" style="width:100%">
+                <div class="label-container">
+                    <span>1: Totalmente en desacuerdo</span>
+                    <span>7: Totalmente de acuerdo</span>
+                </div>
+            </div>`);
     }
 
     function calculate() {
-        // 1. Estilo Cognoscitivo 
-        const getV = (id) => parseInt(document.getElementById(`cog_${id}`).value) || 0;
+        const getV = (id) => parseInt(document.getElementById(`cog_${id}`).value) || 3;
+        
+        // Cálculos Estilo Cognoscitivo 
         const sConoc = (getV(5)+getV(8)+getV(11)+getV(14))/4;
         const sPlan = (getV(1)+getV(3)+getV(6)+getV(9)+getV(12)+getV(15)+getV(17))/7;
         const sCreat = (getV(2)+getV(4)+getV(7)+getV(10)+getV(13)+getV(16)+getV(18))/7;
 
-        // 2. Locus de Control 
+        // Locus de Control 
         let locScore = 0;
         const extKeys = ["2a","3b","4b","5b","6a","7a","9a","10a","11b","12b","13b","15b","16a","17a","18a","20a","21a","22b","23a","25a","26b","28b","29a"];
         extKeys.forEach(key => {
-            const num = key.slice(0,-1);
-            const val = key.slice(-1);
+            const num = key.slice(0,-1); const val = key.slice(-1);
             if(document.querySelector(`input[name="loc_${num}"]:checked`)?.value === val) locScore++;
         });
 
-        // 3. Ambigüedad [cite: 124, 128, 129, 130]
-        let ambVals = [];
+        // Ambigüedad con inversión de pares [cite: 124, 125]
+        let ambTotal = 0;
         for(let i=1; i<=16; i++) {
-            let v = parseInt(document.getElementById(`amb_${i}`).value) || 0;
-            if(i%2===0) v = 8-v; // Inversión de pares [cite: 124]
-            ambVals[i] = v;
+            let v = parseInt(document.getElementById(`amb_${i}`).value) || 4;
+            if(i%2===0) v = 8-v;
+            ambTotal += v;
         }
-        const sNov = ambVals[2]+ambVals[9]+ambVals[11]+ambVals[13];
-        const sComp = ambVals[4]+ambVals[5]+ambVals[6]+ambVals[7]+ambVals[8]+ambVals[10]+ambVals[14]+ambVals[16];
-        const sIns = ambVals[1]+ambVals[3]+ambVals[12];
-        const ambTotal = sNov + sComp + sIns;
 
         document.getElementById('results').style.display = 'block';
         document.getElementById('resultsContent').innerHTML = `
-            <h3>Estilo Cognoscitivo</h3>
-            <ul><li>Conocimiento: ${sConoc.toFixed(2)}</li><li>Planeación: ${sPlan.toFixed(2)}</li><li>Creativo: ${sCreat.toFixed(2)}</li></ul>
-            <h3>Locus de Control: ${locScore} puntos</h3>
-            <p>${locScore <= 11 ? "Locus Interno" : "Locus Externo"}</p>
-            <h3>Tolerancia Ambigüedad: ${ambTotal}</h3>
-            <ul><li>Novedad: ${sNov}</li><li>Complejidad: ${sComp}</li><li>Insolubilidad: ${sIns}</li></ul>
+            <div class="interpretation-box">
+                <h4>1. Estilo Cognoscitivo</h4>
+                <p>• <b>Conocimiento (${sConoc.toFixed(1)}):</b> Mide tu énfasis en hechos y datos objetivos[cite: 108].</p>
+                <p>• <b>Planeación (${sPlan.toFixed(1)}):</b> Evalúa tu inclinación hacia la estructura y preparación[cite: 110].</p>
+                <p>• <b>Creativo (${sCreat.toFixed(1)}):</b> Indica tu apertura a la innovación y soluciones no convencionales[cite: 112].</p>
+            </div>
+            <div class="interpretation-box">
+                <h4>2. Locus de Control (${locScore} pts)</h4>
+                <p>${locScore <= 11 ? "<b>Locus Interno:</b> Crees que tú controlas tu destino mediante tu esfuerzo personal ." : "<b>Locus Externo:</b> Tiendes a creer que factores externos (suerte/otros) influyen más en tus resultados."}</p>
+            </div>
+            <div class="interpretation-box">
+                <h4>3. Tolerancia a la Ambigüedad (${ambTotal})</h4>
+                <p>${ambTotal > 48 ? "<b>Alta Tolerancia:</b> Te sientes cómodo en situaciones complejas o inciertas [cite: 120]." : "<b>Intolerancia:</b> Prefieres entornos claros y predecibles; la incertidumbre puede generarte estrés."}</p>
+            </div>
         `;
         window.scrollTo(0, document.body.scrollHeight);
     }
 
     function switchTab(n) {
-        document.querySelectorAll('.tab, .tab-content').forEach((el, i) => {
-            el.classList.toggle('active', i%3 === n);
-        });
+        document.querySelectorAll('.tab').forEach((el, i) => el.classList.toggle('active', i === n));
+        document.querySelectorAll('.tab-content').forEach((el, i) => el.classList.toggle('active', i === n));
     }
 
     init();
 </script>
 </body>
-</html><
+</html>
