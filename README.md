@@ -1,7 +1,9 @@
 Perfil de autoconocimiento: Whetten & Cameron
+
 Esta herramienta interactiva permite la evaluación diagnóstica de competencias individuales basándose en el marco teórico de Whetten y Cameron (2014) en su obra Desarrollo de habilidades directivas. Está diseñada para fomentar la reflexión crítica sobre el estilo de procesamiento de información y la adaptabilidad ante el entorno cambiante.
 
 Propósito de la herramienta
+
 La aplicación facilita el diagnóstico de tres constructos psicológicos fundamentales para la gestión directiva y la excelencia en el liderazgo:
 
 Estilo Cognoscitivo: Evalúa la inclinación individual para percibir, interpretar y responder a la información. Se analiza a través de las dimensiones de Conocimiento, Planeación y Creatividad. Es una tendencia de aprendizaje susceptible de alteración mediante la práctica consciente.
@@ -20,6 +22,7 @@ Diagnóstico: Al finalizar todos los reactivos, haga clic en "Generar Diagnósti
 Entregable: Copie sus resultados y proceda a completar su archivo REFLEXION.md en su repositorio personal.
 
 Estructura y Dimensiones
+
 1. Estilo Cognoscitivo (18 reactivos)
 Escala: 1 (Totalmente en desacuerdo) a 5 (Totalmente de acuerdo).
 
@@ -44,4 +47,5 @@ Escala: 1 (Totalmente en desacuerdo) a 7 (Totalmente de acuerdo).
 Dimensiones: Evalúa la respuesta ante la Novedad, la Complejidad y la Insolubilidad de los problemas.
 
 Referencia Bibliográfica
+
 Whetten, D. A., & Cameron, K. S. (2014). Desarrollo de habilidades directivas (9ª ed.). Pearson Educación.
