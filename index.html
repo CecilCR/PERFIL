@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Autoconocimiento - Whetten & Cameron (2014)</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -460,31 +459,6 @@
             flex-wrap: wrap;
         }
 
-        /* CHART STYLES */
-        .chart-container {
-            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 4px 15px var(--shadow);
-            border: 2px solid var(--border);
-        }
-
-        .chart-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        #radarChart {
-            max-width: 600px;
-            max-height: 600px;
-            margin: 0 auto;
-            display: block;
-        }
-
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .header h1 {
@@ -664,13 +638,6 @@
     <div id="screen-results" class="screen">
         <div class="results-card">
             <h2 class="results-title">Tu Perfil de Autoconocimiento</h2>
-            
-            <!-- GRÁFICO RADAR -->
-            <div class="chart-container">
-                <h3 class="chart-title">📊 Visualización de Tu Perfil</h3>
-                <canvas id="radarChart"></canvas>
-            </div>
-            
             <div id="resultsContent"></div>
             <div class="action-buttons">
                 <button class="btn-secondary" onclick="window.print()">📄 Imprimir Resultados</button>
@@ -907,17 +874,31 @@
         });
 
         // CÁLCULO TOLERANCIA A LA AMBIGÜEDAD
+        // IMPORTANTE: Invertir reactivos PARES antes de sumar
         let ambTotal = 0;
         const ambScores = { novedad: 0, complejidad: 0, insolubilidad: 0 };
         
         for(let i = 1; i <= 16; i++) {
             let v = vals.amb[i] || 0;
-            if (i % 2 === 0) v = 8 - v;
+            
+            // Invertir reactivos PARES: 7→1, 6→2, 5→3, 4→4, 3→5, 2→6, 1→7
+            if (i % 2 === 0) {
+                v = 8 - v;
+            }
+            
+            // Sumar al total
             ambTotal += v;
             
-            if ([2, 9, 11, 13].includes(i)) ambScores.novedad += v;
-            if ([4, 5, 6, 7, 8, 10, 14, 16].includes(i)) ambScores.complejidad += v;
-            if ([1, 3, 12].includes(i)) ambScores.insolubilidad += v;
+            // Asignar a subescalas (DESPUÉS de invertir)
+            if ([2, 9, 11, 13].includes(i)) {
+                ambScores.novedad += v;
+            }
+            if ([4, 5, 6, 7, 8, 10, 14, 15, 16].includes(i)) {
+                ambScores.complejidad += v;
+            }
+            if ([1, 3, 12].includes(i)) {
+                ambScores.insolubilidad += v;
+            }
         }
 
         // GENERAR RETROALIMENTACIÓN
@@ -932,13 +913,6 @@
             locus: {score: locScore, tipo: locScore <= 11 ? 'INTERNO' : 'EXTERNO'},
             ambiguity: {total: ambTotal, novedad: ambScores.novedad, complejidad: ambScores.complejidad, insolubilidad: ambScores.insolubilidad}
         }));
-
-        // CREAR GRÁFICO RADAR
-        createRadarChart(
-            {conocimiento: sConoc, planeacion: sPlan, creativo: sCreat},
-            locScore,
-            ambTotal
-        );
 
         showScreen('screen-results');
     }
@@ -1078,119 +1052,6 @@
                 <p><em><strong>Área de desarrollo:</strong> Practicar decisiones con información incompleta y exponerte gradualmente a situaciones menos estructuradas puede ayudarte a desarrollar esta capacidad, valiosa en entornos organizacionales dinámicos.</em></p>
             </div>`;
         }
-    }
-
-    // CREAR GRÁFICO RADAR
-    let radarChartInstance = null;
-
-    function createRadarChart(cog, locScore, ambTotal) {
-        // Destruir gráfico anterior si existe
-        if (radarChartInstance) {
-            radarChartInstance.destroy();
-        }
-
-        const ctx = document.getElementById('radarChart').getContext('2d');
-
-        // Normalizar valores a escala de 0-100 para visualización
-        const conocimientoPercent = (cog.conocimiento / 5) * 100;
-        const planeacionPercent = (cog.planeacion / 5) * 100;
-        const creativoPercent = (cog.creativo / 5) * 100;
-        const locusPercent = ((24 - locScore) / 24) * 100; // Invertido: mayor = más interno
-        const ambiguedadPercent = (ambTotal / 112) * 100;
-
-        radarChartInstance = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: [
-                    'Conocimiento\n(Analítico)',
-                    'Planeación\n(Estructurado)',
-                    'Creatividad\n(Innovador)',
-                    'Locus Interno\n(Autocontrol)',
-                    'Tolerancia a\nla Ambigüedad'
-                ],
-                datasets: [{
-                    label: 'Tu Perfil',
-                    data: [
-                        conocimientoPercent,
-                        planeacionPercent,
-                        creativoPercent,
-                        locusPercent,
-                        ambiguedadPercent
-                    ],
-                    backgroundColor: 'rgba(26, 77, 46, 0.2)',
-                    borderColor: 'rgba(26, 77, 46, 1)',
-                    borderWidth: 3,
-                    pointBackgroundColor: 'rgba(26, 77, 46, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(26, 77, 46, 1)',
-                    pointRadius: 6,
-                    pointHoverRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        max: 100,
-                        min: 0,
-                        ticks: {
-                            stepSize: 20,
-                            callback: function(value) {
-                                return value + '%';
-                            },
-                            font: {
-                                size: 12,
-                                family: "'Work Sans', sans-serif"
-                            },
-                            color: '#666'
-                        },
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.1)'
-                        },
-                        angleLines: {
-                            color: 'rgba(0, 0, 0, 0.1)'
-                        },
-                        pointLabels: {
-                            font: {
-                                size: 13,
-                                weight: '600',
-                                family: "'Work Sans', sans-serif"
-                            },
-                            color: '#1a4d2e',
-                            padding: 15
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(26, 77, 46, 0.95)',
-                        titleFont: {
-                            size: 14,
-                            family: "'Work Sans', sans-serif",
-                            weight: 'bold'
-                        },
-                        bodyFont: {
-                            size: 13,
-                            family: "'Work Sans', sans-serif"
-                        },
-                        padding: 12,
-                        cornerRadius: 8,
-                        displayColors: false,
-                        callbacks: {
-                            label: function(context) {
-                                return 'Nivel: ' + context.parsed.r.toFixed(1) + '%';
-                            }
-                        }
-                    }
-                }
-            }
-        });
     }
 
     // Inicializar al cargar
