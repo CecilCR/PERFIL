@@ -1,1 +1,1302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil / Autoconocimiento</title>
+<link rel="icon" href="data:,">
 
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f6f8;
+}
+header{
+  background:#2c5f8d;
+  color:#fff;
+  padding:1.5rem;
+  text-align:center;
+}
+main{
+  max-width:900px;
+  margin:auto;
+  padding:1.5rem;
+}
+.card{
+  background:#fff;
+  padding:2rem;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+button{
+  padding:.8rem 1.2rem;
+  border:none;
+  border-radius:6px;
+  background:#2c5f8d;
+  color:#fff;
+  cursor:pointer;
+  margin-top:1rem;
+  font-size:1rem;
+}
+button:hover{
+  background:#234a6d;
+}
+button:disabled{
+  background:#ccc;
+  cursor:not-allowed;
+}
+.screen{display:none;}
+.screen.active{display:block;}
+
+.tabs{
+  display:flex;
+  gap:.5rem;
+  margin-bottom:1rem;
+  flex-wrap:wrap;
+}
+.tab-btn{
+  flex:1;
+  padding:.6rem;
+  background:#dee2e6;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:.95rem;
+}
+.tab-btn.active{
+  background:#2c5f8d;
+  color:#fff;
+}
+
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.section-title{
+  margin-top:1.5rem;
+  margin-bottom:.5rem;
+  font-weight:bold;
+  color:#2c5f8d;
+  font-size:1.1rem;
+}
+.question{
+  margin-bottom:1.5rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid #e9ecef;
+}
+.question p{
+  margin:0 0 .5rem 0;
+  font-weight:500;
+}
+.scale-labels{
+  display:flex;
+  justify-content:space-between;
+  font-size:.75rem;
+  color:#666;
+  margin-bottom:.5rem;
+}
+.options-container{
+  display:flex;
+  gap:.5rem;
+  justify-content:center;
+  align-items:center;
+}
+.option{
+  display:inline-block;
+  padding:.6rem;
+  border:2px solid #ccc;
+  border-radius:6px;
+  width:42px;
+  text-align:center;
+  cursor:pointer;
+  font-weight:bold;
+  transition:all .2s;
+}
+.option:hover{
+  border-color:#2c5f8d;
+  transform:scale(1.05);
+}
+.option.selected{
+  background:#2c5f8d;
+  color:#fff;
+  border-color:#2c5f8d;
+}
+
+/* Estilos para Locus de Control */
+.locus-option{
+  display:block;
+  padding:.8rem;
+  margin:.5rem 0;
+  border:2px solid #ccc;
+  border-radius:6px;
+  cursor:pointer;
+  transition:all .2s;
+  background:#f8f9fa;
+}
+.locus-option:hover{
+  border-color:#2c5f8d;
+  background:#e3f2fd;
+}
+.locus-option.selected{
+  background:#2c5f8d;
+  color:#fff;
+  border-color:#2c5f8d;
+}
+.locus-option-label{
+  font-weight:bold;
+  margin-right:.5rem;
+}
+
+.progress{
+  background:#e9ecef;
+  height:8px;
+  border-radius:4px;
+  margin:1rem 0;
+  overflow:hidden;
+}
+.progress-bar{
+  background:#2c5f8d;
+  height:100%;
+  transition:width .3s;
+}
+.progress-text{
+  text-align:center;
+  font-size:.9rem;
+  color:#666;
+  margin-top:.5rem;
+}
+.feedback{
+  margin-top:1.5rem;
+  padding:1.5rem;
+  background:#eef2f5;
+  border-radius:8px;
+  border-left:4px solid #2c5f8d;
+}
+.feedback h2{
+  color:#2c5f8d;
+  margin-top:0;
+}
+.feedback h3{
+  color:#2c5f8d;
+  margin-top:1.5rem;
+}
+.result-item{
+  background:#fff;
+  padding:1rem;
+  margin:.5rem 0;
+  border-radius:6px;
+  border-left:4px solid #2c5f8d;
+}
+.result-item strong{
+  color:#2c5f8d;
+}
+.alert{
+  background:#fff3cd;
+  border:1px solid #ffc107;
+  padding:1rem;
+  border-radius:6px;
+  margin:1rem 0;
+  color:#856404;
+}
+.info-box{
+  background:#e3f2fd;
+  padding:1rem;
+  border-radius:6px;
+  margin:1rem 0;
+  border-left:4px solid #2196f3;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Perfil / Autoconocimiento</h1>
+<p style="margin:.5rem 0 0 0; font-size:.9rem; opacity:.9;">Basado en Whetten & Cameron</p>
+</header>
+
+<main>
+
+<!-- BIENVENIDA -->
+<section id="screen-welcome" class="screen active">
+  <div class="card">
+    <h2>Bienvenido al Ejercicio de Autoconocimiento</h2>
+    <p>
+      Este instrumento está basado en la propuesta de <strong>Whetten & Cameron</strong>.
+      Su propósito es ayudarte a reflexionar sobre tu forma de procesar información,
+      tomar decisiones y enfrentar situaciones complejas.
+    </p>
+    <p>
+      <strong>No hay respuestas correctas o incorrectas.</strong>
+      Responde con honestidad pensando en cómo realmente actúas, no en cómo crees que deberías actuar.
+    </p>
+    <div class="info-box">
+      <strong>📋 Dimensiones evaluadas:</strong>
+      <ul style="margin:.5rem 0;">
+        <li><strong>Estilo Cognoscitivo:</strong> Cómo procesas información (Planeación, Creatividad, Conocimiento)</li>
+        <li><strong>Locus de Control:</strong> Percepción sobre quién controla tu destino (Interno vs. Externo)</li>
+        <li><strong>Tolerancia a la Ambigüedad:</strong> <em>(Próximamente)</em></li>
+      </ul>
+    </div>
+    <button id="startBtn">Comenzar Evaluación</button>
+  </div>
+</section>
+
+<!-- EVALUACIÓN -->
+<section id="screen-eval" class="screen">
+  <div class="card">
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="cog">Estilo Cognoscitivo</button>
+      <button class="tab-btn" data-tab="locus">Locus de Control</button>
+      <button class="tab-btn" data-tab="amb">Tolerancia a la Ambigüedad</button>
+    </div>
+
+    <div id="tab-cog" class="tab-panel active"></div>
+    <div id="tab-locus" class="tab-panel"></div>
+    <div id="tab-amb" class="tab-panel"></div>
+
+  </div>
+</section>
+
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", ()=>{
+
+/* =====================
+   DATOS – ESTILO COGNOSCITIVO
+===================== */
+const COGNITIVE_DATA = {
+  scale:[1,2,3,4,5],
+  scaleLabels:["Totalmente en desacuerdo","Totalmente de acuerdo"],
+  sections:[
+    {
+      title:"Estilo de Planeación",
+      questions:[
+        "Para mí es muy importante la elaboración de un plan claro.",
+        "Siempre me gusta saber qué se debe hacer y cuándo.",
+        "Me gustan los planes de acción detallados.",
+        "Prefiero contar con una estructura clara para hacer mi trabajo.",
+        "Prefiero las reuniones bien planeadas y con una agenda clara.",
+        "Tomo decisiones definitivas y hago seguimientos meticulosos.",
+        "Una buena tarea es una tarea bien preparada."
+      ]
+    },
+    {
+      title:"Estilo Creativo",
+      questions:[
+        "Me gusta contribuir a soluciones innovadoras.",
+        "Prefiero buscar soluciones creativas.",
+        "Me siento motivado por la innovación continua.",
+        "Me gusta tener una gran variedad en mi vida.",
+        "Me atraen más las ideas nuevas que las soluciones ya existentes.",
+        "Me gusta extender los límites.",
+        "Trato de evitar la rutina."
+      ]
+    },
+    {
+      title:"Estilo de Conocimiento",
+      questions:[
+        "Me gusta entender plenamente un problema.",
+        "Me gusta analizar los problemas.",
+        "Realizo análisis detallados.",
+        "Estudio cada problema hasta entender la lógica subyacente."
+      ]
+    }
+  ]
+};
+
+/* =====================
+   DATOS – LOCUS DE CONTROL
+===================== */
+const LOCUS_DATA = {
+  instructions: "Este cuestionario evalúa sus opiniones acerca de ciertos temas. Cada reactivo consiste en un par de opciones marcadas con las letras a o b. Seleccione aquella con la que esté más de acuerdo.",
+  questions: [
+    {
+      a: "Los líderes nacen, no se hacen.",
+      b: "Los líderes se hacen, no nacen.",
+      internalOption: "b"
+    },
+    {
+      a: "La gente a menudo tiene éxito porque está en el lugar correcto en el momento adecuado.",
+      b: "El éxito depende en su mayoría del trabajo arduo y la capacidad.",
+      internalOption: "b"
+    },
+    {
+      a: "Cuando las cosas van mal en mi vida, generalmente es porque cometí errores.",
+      b: "Las calamidades ocurren en mi vida sin importar lo que yo haga.",
+      internalOption: "a"
+    },
+    {
+      a: "El hecho de que haya guerra o no depende de las acciones de ciertos líderes mundiales.",
+      b: "Es inevitable que el mundo continúe sufriendo guerras.",
+      internalOption: "a"
+    },
+    {
+      a: "Los hijos buenos son principalmente el resultado de buenos padres.",
+      b: "Algunos hijos se vuelven malos sin importar cómo se comporten sus padres.",
+      internalOption: "a"
+    },
+    {
+      a: "Mi éxito futuro depende principalmente de circunstancias que escapan a mi control.",
+      b: "Soy el dueño de mi destino.",
+      internalOption: "b"
+    },
+    {
+      a: "La historia juzga que ciertas personas fueron líderes eficaces principalmente porque las circunstancias los hicieron visibles y exitosos.",
+      b: "Los líderes eficaces son aquellos que toman decisiones o acciones que dan como resultado contribuciones significativas.",
+      internalOption: "b"
+    },
+    {
+      a: "Evitar el castigo a los niños garantiza que crecerán como personas irresponsables.",
+      b: "Nunca es apropiado disciplinar físicamente a los niños.",
+      internalOption: "neutral"
+    },
+    {
+      a: "A menudo siento que tengo poca influencia en la dirección que está tomando mi vida.",
+      b: "No es razonable pensar que el destino o la suerte tienen importancia crucial en la dirección de mi vida.",
+      internalOption: "b"
+    },
+    {
+      a: "Algunos clientes nunca estarán satisfechos sin importar lo que uno haga.",
+      b: "Uno puede satisfacer a los clientes al darles lo que desean cuando lo desean.",
+      internalOption: "b"
+    },
+    {
+      a: "Cualquier persona puede obtener buenos resultados en la escuela si trabaja con el esfuerzo suficiente.",
+      b: "Algunas personas nunca destacarán en la escuela sin importar lo mucho que se esfuercen.",
+      internalOption: "a"
+    },
+    {
+      a: "Los buenos matrimonios resultan cuando ambos cónyuges trabajan continuamente en la relación.",
+      b: "Algunos matrimonios fracasan porque los cónyuges simplemente son incompatibles.",
+      internalOption: "a"
+    },
+    {
+      a: "Tengo confianza en que puedo mejorar mis habilidades básicas de liderazgo a través del aprendizaje y la práctica.",
+      b: "Es una pérdida de tiempo tratar de mejorar las habilidades de liderazgo en un salón de clases.",
+      internalOption: "a"
+    },
+    {
+      a: "Deberían enseñarse más cursos de habilidades de liderazgo en las escuelas de negocios.",
+      b: "Se debe poner menos énfasis en las habilidades de liderazgo dentro de las escuelas de negocios.",
+      internalOption: "neutral"
+    },
+    {
+      a: "Cuando recuerdo las cosas buenas que me han sucedido, pienso que pasaron porque hice algo bueno.",
+      b: "Las cosas malas que han pasado en mi vida son resultado principalmente de circunstancias fuera de mi control.",
+      internalOption: "a"
+    },
+    {
+      a: "Muchos de los exámenes que presenté en la escuela no tenían conexión con el material que yo había estudiado, así que estudiar mucho no me ayudó en lo absoluto.",
+      b: "Cuando me preparaba bien para los exámenes en la escuela, generalmente obtenía un buen resultado.",
+      internalOption: "b"
+    },
+    {
+      a: "A veces me veo influido por lo que dice mi horóscopo.",
+      b: "Sin importar la posición de los astros, puedo determinar mi propio destino.",
+      internalOption: "b"
+    },
+    {
+      a: "El gobierno es tan grande y burocrático, que es muy difícil que alguien provoque un efecto en lo que sucede.",
+      b: "Los individuos, por sí mismos, pueden tener una influencia real en la política si levantan sus voces y dan a conocer sus deseos.",
+      internalOption: "b"
+    },
+    {
+      a: "Las personas buscan responsabilidad en el trabajo.",
+      b: "Las personas tratan de salirse con la suya trabajando lo menos posible.",
+      internalOption: "neutral"
+    },
+    {
+      a: "Los individuos más populares parecen tener un carisma especial inherente para atraer a la gente.",
+      b: "Los individuos se vuelven populares por su comportamiento.",
+      internalOption: "b"
+    },
+    {
+      a: "En mi vida parecen suceder cosas sobre las que tengo poco control.",
+      b: "La mayor parte del tiempo me siento responsable por los resultados que obtengo.",
+      internalOption: "b"
+    },
+    {
+      a: "Los directivos que mejoren su competencia personal tendrán mayor éxito que aquellos que no lo hagan.",
+      b: "El éxito en las habilidades directivas tiene poco que ver con la competencia que posea el director.",
+      internalOption: "a"
+    },
+    {
+      a: "Los equipos que ganan campeonatos en la mayoría de los deportes generalmente son los que, a fin de cuentas, tienen más suerte.",
+      b: "Con mayor frecuencia, los equipos que ganan los campeonatos son aquellos que tienen a los jugadores más hábiles y que tienen la mejor preparación.",
+      internalOption: "b"
+    },
+    {
+      a: "El trabajo en equipo en los negocios es un requisito para el éxito.",
+      b: "El esfuerzo individual es la mejor clave del éxito.",
+      internalOption: "neutral"
+    },
+    {
+      a: "Algunos empleados simplemente son perezosos y no se les puede motivar de ningún modo.",
+      b: "Si usted es un directivo hábil, puede motivar a casi cualquier empleado para que se esfuerce más en el trabajo.",
+      internalOption: "b"
+    },
+    {
+      a: "A la larga, las personas pueden mejorar la fuerza económica de un país a través de acciones responsables.",
+      b: "La salud económica de este país se encuentra, en gran parte, más allá del control de los individuos.",
+      internalOption: "a"
+    },
+    {
+      a: "Soy persuasivo cuando sé que tengo razón.",
+      b: "Soy capaz de convencer a la mayoría de la gente aun cuando no me sienta seguro de estar en lo correcto.",
+      internalOption: "neutral"
+    },
+    {
+      a: "Tiendo a planear con anticipación y a dar los pasos necesarios para cumplir las metas que he establecido.",
+      b: "Rara vez planeo el futuro porque las cosas generalmente salen bien de cualquier forma.",
+      internalOption: "a"
+    },
+    {
+      a: "Algunas cosas simplemente están destinadas a suceder.",
+      b: "Podemos cambiar cualquier cosa en nuestra vida con trabajo arduo, persistencia y habilidad.",
+      internalOption: "b"
+    }
+  ]
+};
+
+/* =====================
+   DATOS – TOLERANCIA A LA AMBIGÜEDAD
+===================== */
+const AMBIGUITY_DATA = {
+  scale: [1, 2, 3, 4, 5, 6, 7],
+  scaleLabels: {
+    1: "Totalmente en desacuerdo",
+    2: "Moderadamente en desacuerdo",
+    3: "Ligeramente en desacuerdo",
+    4: "Ni de acuerdo ni en desacuerdo",
+    5: "Ligeramente de acuerdo",
+    6: "Moderadamente de acuerdo",
+    7: "Totalmente de acuerdo"
+  },
+  questions: [
+    { text: "Un experto al que no se le ocurre una respuesta definitiva probablemente no sepa demasiado.", reverseScore: false, subscale: "I" },
+    { text: "Me gustaría vivir en el extranjero durante un tiempo.", reverseScore: true, subscale: "N" },
+    { text: "No existe tal cosa como un problema sin solución.", reverseScore: false, subscale: "I" },
+    { text: "La gente que ajusta su vida a un horario probablemente se pierde casi toda la alegría de vivir.", reverseScore: true, subscale: "C" },
+    { text: "Un buen trabajo es aquel en el que siempre está claro lo que se debe hacer y cómo se debe hacer.", reverseScore: false, subscale: "C" },
+    { text: "Es más divertido atacar un problema complicado que resolver uno sencillo.", reverseScore: true, subscale: "C" },
+    { text: "A la larga, es posible realizar más cosas resolviendo los problemas sencillos y pequeños que los grandes y complicados.", reverseScore: false, subscale: "C" },
+    { text: "Con frecuencia, las personas más interesantes y estimulantes son aquellas a las que no les importa ser diferentes y originales.", reverseScore: true, subscale: "C" },
+    { text: "Siempre es preferible algo familiar que algo extraño.", reverseScore: false, subscale: "N" },
+    { text: "Quienes insisten en una respuesta de sí o no simplemente desconocen lo complicadas que son las cosas en realidad.", reverseScore: true, subscale: "C" },
+    { text: "Una persona que lleva una vida normal y estable, en la que surgen pocas sorpresas o sucesos inesperados, tiene mucho que agradecer.", reverseScore: false, subscale: "N" },
+    { text: "Muchas de nuestras decisiones más importantes se basan en información insuficiente.", reverseScore: true, subscale: "I" },
+    { text: "Me gustan más las fiestas en las que conozco a la mayoría de las personas, que las fiestas en las que todos o casi todos son completos extraños.", reverseScore: false, subscale: "N" },
+    { text: "Los maestros o supervisores que asignan tareas ambiguas dan la oportunidad de mostrar iniciativa y originalidad.", reverseScore: true, subscale: "C" },
+    { text: "Cuanto más pronto todos adquiramos valores e ideales similares, mejor.", reverseScore: false, subscale: "C" },
+    { text: "Un buen maestro es aquel que hace pensar al alumno acerca de la forma en que éste ve las cosas.", reverseScore: true, subscale: "C" }
+  ]
+};
+
+const TOTAL_COG_QUESTIONS = COGNITIVE_DATA.sections.reduce((sum, sec) => sum + sec.questions.length, 0);
+const TOTAL_LOCUS_QUESTIONS = LOCUS_DATA.questions.length;
+const TOTAL_AMB_QUESTIONS = AMBIGUITY_DATA.questions.length;
+
+const cognitiveAnswers = new Array(TOTAL_COG_QUESTIONS).fill(undefined);
+const locusAnswers = new Array(TOTAL_LOCUS_QUESTIONS).fill(undefined);
+const ambiguityAnswers = new Array(TOTAL_AMB_QUESTIONS).fill(undefined);
+
+/* =====================
+   NAVEGACIÓN
+===================== */
+document.getElementById("startBtn").addEventListener("click", ()=>{
+  document.getElementById("screen-welcome").classList.remove("active");
+  document.getElementById("screen-eval").classList.add("active");
+  renderCognitive();
+  renderLocus();
+  renderAmbiguity();
+});
+
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".tab-btn").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("tab-"+btn.dataset.tab).classList.add("active");
+  });
+});
+
+/* =====================
+   RENDER ESTILO COGNOSCITIVO
+===================== */
+function renderCognitive(){
+  const panel = document.getElementById("tab-cog");
+  panel.innerHTML = "";
+  
+  const progressContainer = document.createElement("div");
+  progressContainer.innerHTML = `
+    <div class="progress">
+      <div class="progress-bar" id="cogProgressBar" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="cogProgressText">0 de ${TOTAL_COG_QUESTIONS} preguntas respondidas</div>
+  `;
+  panel.appendChild(progressContainer);
+
+  let index = 0;
+
+  COGNITIVE_DATA.sections.forEach(sec=>{
+    const sectionDiv = document.createElement("div");
+    sectionDiv.innerHTML = `<div class="section-title">${sec.title}</div>`;
+    panel.appendChild(sectionDiv);
+    
+    sec.questions.forEach(q=>{
+      renderCognitiveQuestion(panel, index, q);
+      index++;
+    });
+  });
+
+  const finishBtn = document.createElement("button");
+  finishBtn.id = "finishCogBtn";
+  finishBtn.textContent = "Ver Resultados - Estilo Cognoscitivo";
+  finishBtn.addEventListener("click", finishCognitive);
+  panel.appendChild(finishBtn);
+
+  const feedbackDiv = document.createElement("div");
+  feedbackDiv.className = "feedback";
+  feedbackDiv.id = "cogFeedback";
+  feedbackDiv.style.display = "none";
+  panel.appendChild(feedbackDiv);
+
+  updateCognitiveProgress();
+}
+
+function renderCognitiveQuestion(panel, i, text){
+  const div = document.createElement("div");
+  div.className = "question";
+  div.dataset.index = i;
+  
+  const questionText = document.createElement("p");
+  questionText.textContent = `${i+1}. ${text}`;
+  div.appendChild(questionText);
+
+  const scaleLabelsDiv = document.createElement("div");
+  scaleLabelsDiv.className = "scale-labels";
+  scaleLabelsDiv.innerHTML = `
+    <span>${COGNITIVE_DATA.scaleLabels[0]}</span>
+    <span>${COGNITIVE_DATA.scaleLabels[1]}</span>
+  `;
+  div.appendChild(scaleLabelsDiv);
+
+  const optsContainer = document.createElement("div");
+  optsContainer.className = "options-container";
+
+  COGNITIVE_DATA.scale.forEach(v=>{
+    const opt = document.createElement("span");
+    opt.className = "option";
+    opt.textContent = v;
+    opt.dataset.value = v;
+    
+    if(cognitiveAnswers[i] === v){
+      opt.classList.add("selected");
+    }
+    
+    opt.addEventListener("click", ()=>{
+      cognitiveAnswers[i] = v;
+      optsContainer.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));
+      opt.classList.add("selected");
+      updateCognitiveProgress();
+    });
+    
+    optsContainer.appendChild(opt);
+  });
+
+  div.appendChild(optsContainer);
+  panel.appendChild(div);
+}
+
+function updateCognitiveProgress(){
+  const answered = cognitiveAnswers.filter(x => x !== undefined).length;
+  const percentage = Math.round((answered / TOTAL_COG_QUESTIONS) * 100);
+  
+  const progressBar = document.getElementById("cogProgressBar");
+  const progressText = document.getElementById("cogProgressText");
+  
+  if(progressBar){
+    progressBar.style.width = percentage + "%";
+  }
+  if(progressText){
+    progressText.textContent = `${answered} de ${TOTAL_COG_QUESTIONS} preguntas respondidas (${percentage}%)`;
+  }
+}
+
+function finishCognitive(){
+  const validAnswers = cognitiveAnswers.filter(x => x !== undefined);
+  
+  if(validAnswers.length < TOTAL_COG_QUESTIONS){
+    const missing = TOTAL_COG_QUESTIONS - validAnswers.length;
+    alert(`Por favor responde todas las preguntas antes de continuar.\n\nFaltan ${missing} pregunta${missing>1?'s':''} por responder.`);
+    
+    const firstUnanswered = cognitiveAnswers.findIndex(x => x === undefined);
+    if(firstUnanswered !== -1){
+      const questionDiv = document.querySelector(`[data-index="${firstUnanswered}"]`);
+      if(questionDiv){
+        questionDiv.scrollIntoView({behavior:"smooth", block:"center"});
+        questionDiv.style.background = "#fff3cd";
+        setTimeout(()=>{ questionDiv.style.background = ""; }, 2000);
+      }
+    }
+    return;
+  }
+
+  const counts = [7, 7, 4];
+  let idx = 0;
+  const results = [];
+
+  counts.forEach(count=>{
+    let sum = 0;
+    for(let i = 0; i < count; i++){ 
+      sum += cognitiveAnswers[idx] || 0;
+      idx++;
+    }
+    results.push((sum / count).toFixed(2));
+  });
+
+  const [planeacion, creativo, conocimiento] = results;
+
+  let html = `
+    <h2>✅ Resultados - Estilo Cognoscitivo</h2>
+    <p>Tus resultados en las tres dimensiones del Estilo Cognoscitivo:</p>
+    
+    <div class="result-item">
+      <strong>Estilo de Planeación:</strong> ${planeacion} / 5.00
+      ${getFeedbackPlaneacion(parseFloat(planeacion))}
+    </div>
+    
+    <div class="result-item">
+      <strong>Estilo Creativo:</strong> ${creativo} / 5.00
+      ${getFeedbackCreativo(parseFloat(creativo))}
+    </div>
+    
+    <div class="result-item">
+      <strong>Estilo de Conocimiento:</strong> ${conocimiento} / 5.00
+      ${getFeedbackConocimiento(parseFloat(conocimiento))}
+    </div>
+
+    <div class="alert">
+      <strong>Nota importante:</strong> Las tres dimensiones son independientes entre sí. 
+      Puedes tener puntajes altos o bajos en una, dos o las tres. No hay combinaciones "mejores" o "peores".
+    </div>
+  `;
+
+  const feedbackDiv = document.getElementById("cogFeedback");
+  feedbackDiv.innerHTML = html;
+  feedbackDiv.style.display = "block";
+  feedbackDiv.scrollIntoView({behavior:"smooth", block:"start"});
+  
+  document.getElementById("finishCogBtn").style.display = "none";
+}
+
+function getFeedbackPlaneacion(score){
+  if(score >= 4.0){
+    return `
+      <p><strong>Perfil Alto:</strong> Valoras mucho la estructura, el orden y la planificación detallada.</p>
+      <p><strong>Fortaleza:</strong> Excelente para proyectos que requieren organización y seguimiento riguroso.</p>
+      <p><strong>Desafío:</strong> Procura mantener flexibilidad cuando las circunstancias cambien inesperadamente.</p>
+    `;
+  } else if(score >= 2.5){
+    return `
+      <p><strong>Perfil Moderado:</strong> Equilibras la necesidad de planificación con cierta flexibilidad.</p>
+      <p><strong>Fortaleza:</strong> Puedes adaptarte tanto a entornos estructurados como flexibles.</p>
+    `;
+  } else {
+    return `
+      <p><strong>Perfil Bajo:</strong> Prefieres la espontaneidad y te adaptas fácilmente a cambios.</p>
+      <p><strong>Fortaleza:</strong> Gran capacidad de improvisación y adaptación rápida.</p>
+      <p><strong>Desafío:</strong> En proyectos complejos, procura establecer algunos hitos y estructuras básicas.</p>
+    `;
+  }
+}
+
+function getFeedbackCreativo(score){
+  if(score >= 4.0){
+    return `
+      <p><strong>Perfil Alto:</strong> Buscas constantemente innovación y nuevas formas de hacer las cosas.</p>
+      <p><strong>Fortaleza:</strong> Excelente para generar ideas originales y desafiar el status quo.</p>
+      <p><strong>Desafío:</strong> Asegúrate de completar proyectos antes de iniciar nuevas ideas.</p>
+    `;
+  } else if(score >= 2.5){
+    return `
+      <p><strong>Perfil Moderado:</strong> Valoras tanto la creatividad como las soluciones probadas.</p>
+      <p><strong>Fortaleza:</strong> Equilibras innovación con pragmatismo.</p>
+    `;
+  } else {
+    return `
+      <p><strong>Perfil Bajo:</strong> Prefieres métodos probados y confiables.</p>
+      <p><strong>Fortaleza:</strong> Excelente para implementar soluciones eficientes y replicables.</p>
+      <p><strong>Desafío:</strong> Mantente abierto a explorar ocasionalmente enfoques alternativos.</p>
+    `;
+  }
+}
+
+function getFeedbackConocimiento(score){
+  if(score >= 3.6){
+    return `
+      <p><strong>Perfil Alto:</strong> Valoras profundamente la comprensión completa y el análisis exhaustivo.</p>
+      <p><strong>Fortaleza:</strong> Tomas decisiones bien fundamentadas basadas en evidencia sólida.</p>
+      <p><strong>Desafío:</strong> Evita la parálisis por análisis. Establece plazos para decidir con "suficiente" información.</p>
+    `;
+  } else if(score >= 2.5){
+    return `
+      <p><strong>Perfil Moderado:</strong> Equilibras el análisis con la acción.</p>
+      <p><strong>Fortaleza:</strong> Sabes cuándo analizar en profundidad y cuándo actuar rápidamente.</p>
+    `;
+  } else {
+    return `
+      <p><strong>Perfil Bajo:</strong> Tiendes a actuar basándote en intuición o información básica.</p>
+      <p><strong>Fortaleza:</strong> Tomas decisiones rápidas sin quedar atrapado en detalles.</p>
+      <p><strong>Desafío:</strong> En decisiones críticas, dedica tiempo al análisis antes de actuar.</p>
+    `;
+  }
+}
+
+/* =====================
+   RENDER LOCUS DE CONTROL
+===================== */
+function renderLocus(){
+  const panel = document.getElementById("tab-locus");
+  panel.innerHTML = "";
+  
+  const instructionsDiv = document.createElement("div");
+  instructionsDiv.className = "info-box";
+  instructionsDiv.innerHTML = `
+    <strong>Instrucciones:</strong>
+    <p style="margin:.5rem 0 0 0;">${LOCUS_DATA.instructions}</p>
+  `;
+  panel.appendChild(instructionsDiv);
+
+  const progressContainer = document.createElement("div");
+  progressContainer.innerHTML = `
+    <div class="progress">
+      <div class="progress-bar" id="locusProgressBar" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="locusProgressText">0 de ${TOTAL_LOCUS_QUESTIONS} preguntas respondidas</div>
+  `;
+  panel.appendChild(progressContainer);
+
+  LOCUS_DATA.questions.forEach((q, i)=>{
+    renderLocusQuestion(panel, i, q);
+  });
+
+  const finishBtn = document.createElement("button");
+  finishBtn.id = "finishLocusBtn";
+  finishBtn.textContent = "Ver Resultados - Locus de Control";
+  finishBtn.addEventListener("click", finishLocus);
+  panel.appendChild(finishBtn);
+
+  const feedbackDiv = document.createElement("div");
+  feedbackDiv.className = "feedback";
+  feedbackDiv.id = "locusFeedback";
+  feedbackDiv.style.display = "none";
+  panel.appendChild(feedbackDiv);
+
+  updateLocusProgress();
+}
+
+function renderLocusQuestion(panel, i, questionData){
+  const div = document.createElement("div");
+  div.className = "question";
+  div.dataset.locusindex = i;
+  
+  const questionNum = document.createElement("p");
+  questionNum.innerHTML = `<strong>Pregunta ${i+1}</strong>`;
+  div.appendChild(questionNum);
+
+  const optionA = document.createElement("div");
+  optionA.className = "locus-option";
+  optionA.dataset.value = "a";
+  optionA.innerHTML = `<span class="locus-option-label">a.</span> ${questionData.a}`;
+  
+  if(locusAnswers[i] === "a"){
+    optionA.classList.add("selected");
+  }
+  
+  optionA.addEventListener("click", ()=>{
+    locusAnswers[i] = "a";
+    div.querySelectorAll(".locus-option").forEach(x=>x.classList.remove("selected"));
+    optionA.classList.add("selected");
+    updateLocusProgress();
+  });
+
+  const optionB = document.createElement("div");
+  optionB.className = "locus-option";
+  optionB.dataset.value = "b";
+  optionB.innerHTML = `<span class="locus-option-label">b.</span> ${questionData.b}`;
+  
+  if(locusAnswers[i] === "b"){
+    optionB.classList.add("selected");
+  }
+  
+  optionB.addEventListener("click", ()=>{
+    locusAnswers[i] = "b";
+    div.querySelectorAll(".locus-option").forEach(x=>x.classList.remove("selected"));
+    optionB.classList.add("selected");
+    updateLocusProgress();
+  });
+
+  div.appendChild(optionA);
+  div.appendChild(optionB);
+  panel.appendChild(div);
+}
+
+function updateLocusProgress(){
+  const answered = locusAnswers.filter(x => x !== undefined).length;
+  const percentage = Math.round((answered / TOTAL_LOCUS_QUESTIONS) * 100);
+  
+  const progressBar = document.getElementById("locusProgressBar");
+  const progressText = document.getElementById("locusProgressText");
+  
+  if(progressBar){
+    progressBar.style.width = percentage + "%";
+  }
+  if(progressText){
+    progressText.textContent = `${answered} de ${TOTAL_LOCUS_QUESTIONS} preguntas respondidas (${percentage}%)`;
+  }
+}
+
+function finishLocus(){
+  const validAnswers = locusAnswers.filter(x => x !== undefined);
+  
+  if(validAnswers.length < TOTAL_LOCUS_QUESTIONS){
+    const missing = TOTAL_LOCUS_QUESTIONS - validAnswers.length;
+    alert(`Por favor responde todas las preguntas antes de continuar.\n\nFaltan ${missing} pregunta${missing>1?'s':''} por responder.`);
+    
+    const firstUnanswered = locusAnswers.findIndex(x => x === undefined);
+    if(firstUnanswered !== -1){
+      const questionDiv = document.querySelector(`[data-locusindex="${firstUnanswered}"]`);
+      if(questionDiv){
+        questionDiv.scrollIntoView({behavior:"smooth", block:"center"});
+        questionDiv.style.background = "#fff3cd";
+        setTimeout(()=>{ questionDiv.style.background = ""; }, 2000);
+      }
+    }
+    return;
+  }
+
+  // Calcular puntaje de locus externo
+  // IMPORTANTE: A MAYOR puntaje = Mayor orientación EXTERNA
+  // A MENOR puntaje = Mayor orientación INTERNA
+  let externalScore = 0;
+  
+  LOCUS_DATA.questions.forEach((q, i)=>{
+    const userAnswer = locusAnswers[i];
+    
+    // Si la pregunta no es neutral, contar respuestas externas
+    if(q.internalOption !== "neutral"){
+      // Si el usuario NO escogió la opción interna, suma 1 punto (orientación externa)
+      if(userAnswer !== q.internalOption){
+        externalScore++;
+      }
+    }
+  });
+  
+  console.log("Respuestas externas:", externalScore);
+  console.log("Total preguntas válidas:", LOCUS_DATA.questions.filter(q => q.internalOption !== "neutral").length);
+
+  let html = `
+    <h2>✅ Resultados - Locus de Control</h2>
+    <p><strong>Tu puntaje:</strong> ${externalScore} puntos</p>
+    ${getFeedbackLocus(externalScore)}
+    
+    <h3>¿Qué es el Locus de Control?</h3>
+    <p>
+      El <em>locus</em> de control se refiere a la actitud que desarrollan los individuos 
+      respecto a qué tanto controlan sus propios destinos. Las personas con 
+      <strong>locus de control interno</strong> interpretan los resultados como consecuencia 
+      de sus propias acciones, mientras que aquellas con <strong>locus de control externo</strong> 
+      los atribuyen a fuerzas externas como la suerte, el destino o circunstancias.
+    </p>
+
+    <button onclick="window.print()" style="margin-top:1rem;">🖨️ Imprimir Resultados</button>
+    <button onclick="location.reload()" style="margin-top:1rem; background:#6c757d;">🔄 Realizar Nueva Evaluación</button>
+  `;
+
+  const feedbackDiv = document.getElementById("locusFeedback");
+  feedbackDiv.innerHTML = html;
+  feedbackDiv.style.display = "block";
+  feedbackDiv.scrollIntoView({behavior:"smooth", block:"start"});
+  
+  document.getElementById("finishLocusBtn").style.display = "none";
+}
+
+function getFeedbackLocus(score){
+  // NOTA: Score representa respuestas EXTERNAS (cuantas veces NO eligió la opción interna)
+  // Con 24 preguntas válidas:
+  // - 0-10 puntos = Orientación INTERNA (hasta 41% de respuestas externas)
+  // - 11-13 puntos = Orientación EQUILIBRADA (45-54% de respuestas externas)
+  // - 14-24 puntos = Orientación EXTERNA (58%+ de respuestas externas)
+  
+  if(score >= 0 && score <= 10){
+    return `
+      <div class="result-item">
+        <h3>ORIENTACIÓN INTERNA (PERFIL PROTAGONISTA)</h3>
+        <p><strong>Contexto:</strong> Existe una firme creencia de que las acciones propias definen los 
+        resultados. Los éxitos se interpretan como logros personales y los errores como áreas de mejora. 
+        ${score === 0 ? 'Tu puntaje de 0 representa el grado máximo de esta convicción.' : ''}</p>
+        
+        <p><strong>Ventajas:</strong> Alta proactividad, responsabilidad y orientación al logro. 
+        Esta autoconfianza permite liderar proyectos con determinación y autonomía.</p>
+        
+        <p><strong>Recomendación:</strong> Es importante evitar el estrés excesivo al intentar controlar 
+        variables externas imposibles de cambiar. Aprender a delegar y aceptar que el entorno también 
+        influye es clave para mantener un liderazgo saludable.</p>
+      </div>
+    `;
+  } else if(score >= 11 && score <= 13){
+    return `
+      <div class="result-item">
+        <h3>ORIENTACIÓN EQUILIBRADA (PERFIL REALISTA)</h3>
+        <p><strong>Contexto:</strong> Se mantiene una visión equilibrada sobre la influencia personal 
+        y la externa. Se entiende que el esfuerzo es la clave, pero que el contexto también juega un 
+        papel relevante en el resultado final.</p>
+        
+        <p><strong>Ventajas:</strong> Gran resiliencia. Existe la capacidad de esforzarse al máximo y, 
+        a la vez, adaptarse a las circunstancias externas sin frustración excesiva cuando las cosas no 
+        salen como se planearon.</p>
+        
+        <p><strong>Recomendación:</strong> En situaciones críticas, hay que asegurar que no se caiga en 
+        la pasividad. Conviene reforzar el sentido de agencia preguntándose siempre: "¿Qué pequeña acción 
+        puedo tomar yo en este momento para cambiar el rumbo?".</p>
+      </div>
+    `;
+  } else {
+    return `
+      <div class="result-item">
+        <h3>ORIENTACIÓN EXTERNA (PERFIL DE ANÁLISIS SISTÉMICO)</h3>
+        <p><strong>Contexto:</strong> Se percibe que factores como la suerte, el destino o personas con 
+        autoridad tienen un peso mayor en los resultados obtenidos que el esfuerzo propio.</p>
+        
+        <p><strong>Ventajas:</strong> Gran capacidad para identificar problemas en los sistemas o fallas 
+        estructurales que otras personas podrían ignorar por centrarse excesivamente en su propia gestión.</p>
+        
+        <p><strong>Recomendación:</strong> Es vital trabajar en el empoderamiento personal. Se recomienda 
+        establecer metas pequeñas y alcanzables para comprobar cómo las acciones directas generan cambios 
+        positivos, fortaleciendo gradualmente la percepción de control.</p>
+      </div>
+    `;
+  }
+}
+
+/* =====================
+   RENDER TOLERANCIA A LA AMBIGÜEDAD
+===================== */
+function renderAmbiguity(){
+  const panel = document.getElementById("tab-amb");
+  panel.innerHTML = "";
+  
+  const instructionsDiv = document.createElement("div");
+  instructionsDiv.className = "info-box";
+  instructionsDiv.innerHTML = `
+    <strong>Instrucciones:</strong>
+    <p style="margin:.5rem 0 0 0;">Esta escala evalúa tu capacidad para procesar situaciones de incertidumbre. 
+    Responde según tu nivel de acuerdo con cada afirmación utilizando la escala de 1 a 7.</p>
+  `;
+  panel.appendChild(instructionsDiv);
+
+  const progressContainer = document.createElement("div");
+  progressContainer.innerHTML = `
+    <div class="progress">
+      <div class="progress-bar" id="ambProgressBar" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="ambProgressText">0 de ${TOTAL_AMB_QUESTIONS} preguntas respondidas</div>
+  `;
+  panel.appendChild(progressContainer);
+
+  AMBIGUITY_DATA.questions.forEach((q, i)=>{
+    renderAmbiguityQuestion(panel, i, q);
+  });
+
+  const finishBtn = document.createElement("button");
+  finishBtn.id = "finishAmbBtn";
+  finishBtn.textContent = "Ver Resultados - Tolerancia a la Ambigüedad";
+  finishBtn.addEventListener("click", finishAmbiguity);
+  panel.appendChild(finishBtn);
+
+  const feedbackDiv = document.createElement("div");
+  feedbackDiv.className = "feedback";
+  feedbackDiv.id = "ambFeedback";
+  feedbackDiv.style.display = "none";
+  panel.appendChild(feedbackDiv);
+
+  updateAmbiguityProgress();
+}
+
+function renderAmbiguityQuestion(panel, i, questionData){
+  const div = document.createElement("div");
+  div.className = "question";
+  div.dataset.ambindex = i;
+  
+  const questionText = document.createElement("p");
+  questionText.textContent = `${i+1}. ${questionData.text}`;
+  div.appendChild(questionText);
+
+  const scaleLabelsDiv = document.createElement("div");
+  scaleLabelsDiv.className = "scale-labels";
+  scaleLabelsDiv.innerHTML = `
+    <span>1 - Totalmente en desacuerdo</span>
+    <span>7 - Totalmente de acuerdo</span>
+  `;
+  div.appendChild(scaleLabelsDiv);
+
+  const optsContainer = document.createElement("div");
+  optsContainer.className = "options-container";
+
+  AMBIGUITY_DATA.scale.forEach(v=>{
+    const opt = document.createElement("span");
+    opt.className = "option";
+    opt.textContent = v;
+    opt.dataset.value = v;
+    opt.title = AMBIGUITY_DATA.scaleLabels[v];
+    
+    if(ambiguityAnswers[i] === v){
+      opt.classList.add("selected");
+    }
+    
+    opt.addEventListener("click", ()=>{
+      ambiguityAnswers[i] = v;
+      optsContainer.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));
+      opt.classList.add("selected");
+      updateAmbiguityProgress();
+    });
+    
+    optsContainer.appendChild(opt);
+  });
+
+  div.appendChild(optsContainer);
+  panel.appendChild(div);
+}
+
+function updateAmbiguityProgress(){
+  const answered = ambiguityAnswers.filter(x => x !== undefined).length;
+  const percentage = Math.round((answered / TOTAL_AMB_QUESTIONS) * 100);
+  
+  const progressBar = document.getElementById("ambProgressBar");
+  const progressText = document.getElementById("ambProgressText");
+  
+  if(progressBar){
+    progressBar.style.width = percentage + "%";
+  }
+  if(progressText){
+    progressText.textContent = `${answered} de ${TOTAL_AMB_QUESTIONS} preguntas respondidas (${percentage}%)`;
+  }
+}
+
+function finishAmbiguity(){
+  const validAnswers = ambiguityAnswers.filter(x => x !== undefined);
+  
+  if(validAnswers.length < TOTAL_AMB_QUESTIONS){
+    const missing = TOTAL_AMB_QUESTIONS - validAnswers.length;
+    alert(`Por favor responde todas las preguntas antes de continuar.\n\nFaltan ${missing} pregunta${missing>1?'s':''} por responder.`);
+    
+    const firstUnanswered = ambiguityAnswers.findIndex(x => x === undefined);
+    if(firstUnanswered !== -1){
+      const questionDiv = document.querySelector(`[data-ambindex="${firstUnanswered}"]`);
+      if(questionDiv){
+        questionDiv.scrollIntoView({behavior:"smooth", block:"center"});
+        questionDiv.style.background = "#fff3cd";
+        setTimeout(()=>{ questionDiv.style.background = ""; }, 2000);
+      }
+    }
+    return;
+  }
+
+  // VALIDACIÓN: Detectar respuestas automáticas/inconsistentes
+  const uniqueAnswers = [...new Set(ambiguityAnswers)];
+  const isAllSameAnswer = uniqueAnswers.length === 1;
+  
+  // Calcular puntajes con inversión de reactivos pares
+  let totalScore = 0;
+  let noveltyScore = 0;
+  let complexityScore = 0;
+  let insolvabilityScore = 0;
+  
+  AMBIGUITY_DATA.questions.forEach((q, i) => {
+    let score = ambiguityAnswers[i];
+    
+    // Invertir puntaje si el reactivo es par (índice impar, ya que empezamos en 0)
+    if(q.reverseScore) {
+      score = 8 - score; // Inversión: 1->7, 2->6, 3->5, 4->4, 5->3, 6->2, 7->1
+    }
+    
+    totalScore += score;
+    
+    // Sumar a subescala correspondiente
+    if(q.subscale === "N") noveltyScore += score;
+    else if(q.subscale === "C") complexityScore += score;
+    else if(q.subscale === "I") insolvabilityScore += score;
+  });
+
+  // Calcular promedios por subescala
+  const noveltyAvg = (noveltyScore / 4).toFixed(2); // 4 preguntas
+  const complexityAvg = (complexityScore / 9).toFixed(2); // 9 preguntas
+  const insolvabilityAvg = (insolvabilityScore / 3).toFixed(2); // 3 preguntas
+  const totalAvg = (totalScore / 16).toFixed(2);
+
+  let html = `
+    <h2>✅ Resultados - Tolerancia a la Ambigüedad</h2>
+  `;
+  
+  // ADVERTENCIA para respuestas inconsistentes
+  if(isAllSameAnswer && parseFloat(totalAvg) === 4.0){
+    html += `
+      <div class="alert" style="background:#ffebee; border-color:#f44336; color:#c62828;">
+        <strong>⚠️ ADVERTENCIA: Patrón de Respuesta Inconsistente Detectado</strong>
+        <p style="margin:.5rem 0 0 0;">
+          Has marcado <strong>todas las respuestas con el mismo valor (${ambiguityAnswers[0]})</strong>. 
+          Esto produce un resultado de <strong>4.0 (punto medio exacto)</strong> debido al diseño balanceado 
+          del instrumento (8 preguntas con inversión, 8 sin inversión).
+        </p>
+        <p style="margin:.5rem 0 0 0;">
+          <strong>Este patrón sugiere:</strong> Respuestas automáticas sin reflexión individual por pregunta, 
+          o posible sesgo de aquiescencia/negación. Los resultados no reflejan tu verdadera tolerancia 
+          a la ambigüedad.
+        </p>
+        <p style="margin:.5rem 0 0 0;">
+          <strong>Recomendación:</strong> Por favor, responde nuevamente leyendo cuidadosamente cada pregunta 
+          y reflexionando sobre tu verdadero nivel de acuerdo con cada afirmación específica.
+        </p>
+      </div>
+    `;
+  } else {
+    html += `
+      <div class="alert">
+        <strong>📊 Interpretación del Puntaje:</strong>
+        <p style="margin:.5rem 0;">
+          • Un resultado más <strong>alto</strong> significa <strong>menor comodidad</strong> con la incertidumbre<br>
+          • Un resultado más <strong>bajo</strong> significa <strong>mayor comodidad</strong> con la incertidumbre
+        </p>
+      </div>
+    `;
+  }
+
+  html += `
+    <div class="result-item">
+      <h3>Puntaje Total: ${totalScore} puntos (Promedio: ${totalAvg}/7)</h3>
+      ${getFeedbackAmbiguityTotal(parseFloat(totalAvg))}
+    </div>
+
+    <h3>Análisis por Dimensiones:</h3>
+    
+    <div class="result-item">
+      <strong>1. Novedad (N):</strong> ${noveltyAvg}/7
+      <p><em>Respuesta ante estímulos o situaciones desconocidas.</em></p>
+      ${getFeedbackSubscale(parseFloat(noveltyAvg), "novedad")}
+    </div>
+
+    <div class="result-item">
+      <strong>2. Complejidad (C):</strong> ${complexityAvg}/7
+      <p><em>Capacidad de gestionar escenarios con múltiples variables.</em></p>
+      ${getFeedbackSubscale(parseFloat(complexityAvg), "complejidad")}
+    </div>
+
+    <div class="result-item">
+      <strong>3. Insolubilidad (I):</strong> ${insolvabilityAvg}/7
+      <p><em>Tolerancia frente a problemas sin resolución inmediata.</em></p>
+      ${getFeedbackSubscale(parseFloat(insolvabilityAvg), "insolubilidad")}
+    </div>
+
+    <h3>Interpretación Integral</h3>
+    <p>
+      La tolerancia a la ambigüedad es la capacidad de procesar situaciones de incertidumbre 
+      sin experimentar malestar excesivo. Las tres dimensiones te permiten identificar:
+    </p>
+    <ul>
+      <li><strong>Novedad:</strong> Si te incomoda lo desconocido o disfrutas explorarlo</li>
+      <li><strong>Complejidad:</strong> Si prefieres claridad o manejas bien la multiplicidad</li>
+      <li><strong>Insolubilidad:</strong> Si necesitas respuestas definitivas o toleras la incertidumbre</li>
+    </ul>
+
+    <button onclick="window.print()" style="margin-top:1rem;">🖨️ Imprimir Resultados</button>
+    <button onclick="location.reload()" style="margin-top:1rem; background:#6c757d;">🔄 Realizar Nueva Evaluación</button>
+  `;
+
+  const feedbackDiv = document.getElementById("ambFeedback");
+  feedbackDiv.innerHTML = html;
+  feedbackDiv.style.display = "block";
+  feedbackDiv.scrollIntoView({behavior:"smooth", block:"start"});
+  
+  document.getElementById("finishAmbBtn").style.display = "none";
+}
+
+function getFeedbackAmbiguityTotal(avgScore){
+  // Escala de 1-7, donde el puntaje final (después de inversiones) refleja INtolerancia
+  // RANGOS FINALES AJUSTADOS:
+  // - Bajo (1.0-4.0): Alta tolerancia ← Incluye el punto medio balanceado
+  // - Medio (4.1-5.0): Tolerancia moderada ← Respuestas mixtas inclinadas al centro-alto
+  // - Alto (5.1-7.0): Baja tolerancia ← Respuestas 6-7
+  
+  if(avgScore >= 5.1){
+    return `
+      <p><strong>Baja Tolerancia a la Ambigüedad:</strong> Tiendes a percibir la falta de información 
+      o la incertidumbre como una amenaza. Prefieres claridad, estructura y respuestas definitivas.</p>
+      <p><strong>Ventaja:</strong> Excelente en roles que requieren precisión, seguimiento de protocolos 
+      y toma de decisiones basadas en información completa.</p>
+      <p><strong>Recomendación:</strong> En contextos innovadores o cambiantes, practica técnicas para 
+      reducir la ansiedad ante lo desconocido. Recuerda que la incertidumbre puede ser fuente de oportunidades.</p>
+    `;
+  } else if(avgScore >= 4.1){
+    return `
+      <p><strong>Tolerancia Moderada a la Ambigüedad:</strong> Manejas situaciones ambiguas de forma equilibrada. 
+      Valoras la claridad pero puedes adaptarte cuando es necesario.</p>
+      <p><strong>Ventaja:</strong> Versatilidad para trabajar en diferentes tipos de entornos, 
+      desde los más estructurados hasta los más flexibles.</p>
+      <p><strong>Recomendación:</strong> Continúa desarrollando esta flexibilidad cognitiva para 
+      aprovechar tanto situaciones claras como ambiguas.</p>
+    `;
+  } else {
+    return `
+      <p><strong>Alta Tolerancia a la Ambigüedad:</strong> Te sientes cómodo con la incertidumbre 
+      y la ves como un desafío prometedor más que como una amenaza.</p>
+      <p><strong>Ventaja:</strong> Ideal para entornos innovadores, creativos o de rápido cambio 
+      donde la ambigüedad es constante.</p>
+      <p><strong>Recomendación:</strong> Aunque disfrutas la flexibilidad, recuerda que algunos 
+      contextos requieren estructura y claridad. Balancea tu preferencia natural con las necesidades 
+      del entorno.</p>
+    `;
+  }
+}
+
+function getFeedbackSubscale(score, dimension){
+  // Rangos ajustados: ≤4.0 = baja intolerancia, 4.1-5.0 = moderada, ≥5.1 = alta intolerancia
+  const isHigh = score >= 5.1;
+  const isLow = score <= 4.0;
+  
+  if(dimension === "novedad"){
+    if(isHigh){
+      return `<p>Prefieres lo familiar y conocido. Las situaciones nuevas pueden generarte incomodidad.</p>`;
+    } else if(isLow){
+      return `<p>Disfrutas de lo novedoso y desconocido. Te motiva explorar territorios nuevos.</p>`;
+    } else {
+      return `<p>Equilibrio entre aprecio por lo conocido y apertura a lo nuevo.</p>`;
+    }
+  } else if(dimension === "complejidad"){
+    if(isHigh){
+      return `<p>Prefieres instrucciones claras y problemas bien definidos. La multiplicidad de variables te abruma.</p>`;
+    } else if(isLow){
+      return `<p>Te atraen los desafíos complejos y multifacéticos. Disfrutas gestionar múltiples variables.</p>`;
+    } else {
+      return `<p>Manejas tanto problemas simples como complejos según el contexto.</p>`;
+    }
+  } else { // insolubilidad
+    if(isHigh){
+      return `<p>Necesitas respuestas definitivas y soluciones claras. Los problemas sin solución evidente te frustran.</p>`;
+    } else if(isLow){
+      return `<p>Aceptas que muchas decisiones se toman con información incompleta. Toleras la falta de soluciones definitivas.</p>`;
+    } else {
+      return `<p>Balanceas la necesidad de respuestas con la aceptación de que no siempre están disponibles.</p>`;
+    }
+  }
+}
+
+});
+
+</script>
+
+</body>
+</html>
